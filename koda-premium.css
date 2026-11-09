@@ -203,3 +203,51 @@ h1, h2, h3, h4 { font-family: var(--k-font-display); letter-spacing: -.02em; }
 .text-\[\#2a1635\]{color:rgb(14 9 22)!important}
 .text-\[\#2a1635\]\/70{color:rgb(14 9 22 / 0.7)!important}
 .text-\[\#b168d9\]{color:rgb(167 139 250)!important}
+
+/* ===== ETAPA 2 · NAVEGACIÓN GLOBAL ===== */
+.k-sidebar{position:fixed;z-index:45;display:flex;background:rgb(var(--k-surface,24 17 38));border:1px solid rgb(255 255 255 / .07)}
+.k-logo{font-size:1.6rem;line-height:1;padding:.25rem .75rem}
+.k-nav-list{display:flex;gap:.25rem}
+.k-nav{display:flex;align-items:center;gap:.75rem;border:1px solid transparent;border-radius:14px;color:rgb(255 255 255 / .6);background:transparent;cursor:pointer;font-weight:600;transition:background .2s,color .2s,border-color .2s}
+.k-nav:hover{color:#fff;background:rgb(255 255 255 / .05)}
+.k-nav[aria-current="page"]{color:#fff!important;background:rgb(124 58 237 / .22);border-color:rgb(167 139 250 / .35)}
+.k-nav[aria-current="page"] svg{color:#CDBFFF}
+.k-nav__txt{font-size:.9rem}
+.k-nuevo{justify-content:center;gap:.5rem}
+.k-topbar{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1500px;margin-bottom:1rem}
+.k-topbar__logo{font-size:1.5rem;line-height:1}
+.k-topbar__actions{display:flex;align-items:center;gap:.5rem;margin-left:auto}
+.k-iconbtn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;color:rgb(255 255 255 / .7);background:rgb(255 255 255 / .04);border:1px solid rgb(255 255 255 / .07);cursor:pointer;transition:background .2s,color .2s}
+.k-iconbtn:hover{color:#fff;background:rgb(255 255 255 / .09)}
+html:not(.dark) .k-sidebar{border-color:rgb(0 0 0 / .08)}
+html:not(.dark) .k-nav{color:rgb(0 0 0 / .6)}
+html:not(.dark) .k-nav:hover{color:#000;background:rgb(0 0 0 / .05)}
+html:not(.dark) .k-nav[aria-current="page"]{color:#2e1065!important;background:rgb(124 58 237 / .12)}
+html:not(.dark) .k-iconbtn{color:rgb(0 0 0 / .7);background:rgb(0 0 0 / .04);border-color:rgb(0 0 0 / .08)}
+/* Móvil: barra inferior */
+@media (max-width:1279px){
+  .k-sidebar{left:0;right:0;bottom:0;padding:.4rem .5rem calc(.4rem + env(safe-area-inset-bottom));border-width:1px 0 0}
+  .k-logo,.k-nuevo{display:none}
+  .k-nav-list{width:100%;justify-content:space-around}
+  .k-nav{flex-direction:column;gap:.15rem;padding:.4rem .5rem;font-size:.68rem;min-width:0;flex:1}
+  .k-nav__txt{font-size:.68rem}
+  .k-topbar{justify-content:space-between}
+  body.k-nav-lateral{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom))}
+  /* El botón + vive DENTRO de la barra inferior (a la derecha), así nunca tapa contenido */
+  .k-nav-list{padding-right:54px;gap:0}
+  .k-nav{padding:.4rem .1rem}
+  .k-nav__txt{font-size:.62rem;letter-spacing:-.01em;white-space:nowrap}
+  .k-fab{right:.5rem!important;bottom:calc(.45rem + env(safe-area-inset-bottom))!important;width:48px!important;height:48px!important;z-index:46!important;background:linear-gradient(135deg,#C026D3,#7C3AED)!important;box-shadow:none!important}
+  .k-fab svg{width:22px;height:22px}
+}
+@media (max-width:380px){.k-nav__txt{font-size:.56rem!important}.k-nav-list{padding-right:52px}}
+/* Escritorio: barra lateral */
+@media (min-width:1280px){
+  .k-sidebar{top:0;left:0;bottom:0;width:232px;flex-direction:column;gap:1.5rem;padding:1.5rem 1rem;border-width:0 1px 0 0}
+  .k-nav-list{flex-direction:column}
+  .k-nav{padding:.7rem .9rem}
+  .k-nuevo{margin-top:auto}
+  .k-topbar__logo{display:none}
+  .k-fab{display:none!important}
+  body.k-nav-lateral{padding-left:calc(232px + 1.5rem)}
+}
