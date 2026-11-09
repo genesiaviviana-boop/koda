@@ -9,7 +9,7 @@
         // Navegación y encabezado
         'Dashboard': 'Inicio', 'Envelopes': 'Sobres', 'Obligations': 'Obligaciones', 'Goals': 'Metas', 'Check Pay': 'Pagos',
         'Notifications': 'Notificaciones', 'Mark all read': 'Marcar como leídas', 'Clear': 'Limpiar', 'All clear': 'Todo al día',
-        'Ask KODA': 'Pregúntale a KODA', 'Message': 'Mensaje', 'New chat': 'Chat nuevo', 'Close': 'Cerrar', 'Sign out': 'Cerrar sesión',
+        'Ask KODA': 'Pregúntale a KODA', 'Message': 'Mensaje', 'New chat': 'Chat nuevo', 'Close': 'Cerrar', 'Sign out': 'Cerrar sesión', 'New': 'Nuevo', 'Search transactions, envelopes, accounts…': 'Buscar movimientos, sobres, cuentas…', 'Search': 'Buscar', 'Income · latest period': 'Ingresos · último período', 'Expenses · latest period': 'Gastos · último período', 'Net · latest period': 'Neto · último período', 'Real balance, card debt included': 'Saldo real, incluye deuda de tarjetas',
         'You will need your access key to sign in again on this device.': 'Necesitarás tu clave de acceso para entrar de nuevo en este dispositivo.',
         'Just now': 'Justo ahora', 'Now': 'Ahora',
         'Ask about your accounts, envelopes, bills or goals.': 'Pregunta por tus cuentas, sobres, pagos o metas.',

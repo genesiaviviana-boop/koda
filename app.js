@@ -92,7 +92,6 @@ async function inicializarKODA() {
         
         // Etapa 2: marca accesible de la sección activa y modo de navegación lateral
         if (btnActivo) { btnActivo.setAttribute('aria-current', 'page'); }
-        if (contNav) document.body.classList.add('k-nav-lateral');
 
         if (btnActivo) {
             setTimeout(() => {
@@ -2072,3 +2071,62 @@ revertirMovimientoContable = function (id) { const x = _kodaRevertirOrig(id); ko
         return _orig.apply(this, arguments);
     };
 })();
+
+
+// ==========================================
+// [APP-BUSCADOR] BÚSQUEDA GLOBAL DEL ENCABEZADO (solo lee los datos ya cargados; no calcula ni guarda nada)
+// ==========================================
+let kodaBusquedaItems = [], kodaBusquedaSel = -1, kodaBusquedaListo = false;
+function kodaEscBusq(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function kodaNorm(s) { return String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function kodaMonedaBusq(n) { return (n < 0 ? '-$' : '$') + Math.abs(Math.round((n || 0) * 100) / 100).toLocaleString('en-US'); }
+function kodaBuscarGlobal(texto) {
+    const panel = document.getElementById('k-search-panel');
+    if (!panel) return;
+    if (!kodaBusquedaListo) {
+        kodaBusquedaListo = true;
+        document.addEventListener('click', e => { const b = document.getElementById('k-search'); if (b && !b.contains(e.target) && !(e.target.closest && e.target.closest('#k-search-btn'))) kodaCerrarBusqueda(); });
+    }
+    const q = kodaNorm(texto).trim();
+    kodaBusquedaSel = -1; kodaBusquedaItems = [];
+    if (q.length < 1) { panel.classList.add('hidden'); panel.innerHTML = ''; return; }
+    const coincide = (...campos) => campos.some(c => kodaNorm(c).includes(q));
+    const grupos = [];
+    const mov = (typeof historialDB !== 'undefined' ? historialDB : []).filter(m => coincide(m.desc, m.categoria, m.sobre, m.tipo, m.cuentaOrigen, String(Math.abs(m.monto)), kodaMonedaBusq(m.monto)))
+        .sort((a, b) => new Date(b.fechaStr) - new Date(a.fechaStr)).slice(0, 5)
+        .map(m => ({ t: m.desc || m.tipo, s: `${typeof formatearFechaUI === 'function' ? formatearFechaUI(m.fechaStr) : m.fechaStr} · ${m.categoria || m.tipo}`, v: kodaMonedaBusq(m.monto), go: () => { if (document.getElementById('modal-movimiento') && typeof abrirModalEdicion === 'function' && m.tipo !== 'Préstamo') abrirModalEdicion(m.id); else navegarA('historial'); } }));
+    if (mov.length) grupos.push(['Movimientos', mov]);
+    const sob = (typeof sobresDB !== 'undefined' ? sobresDB : []).filter(s => coincide(s.nombre)).slice(0, 4).map(s => ({ t: s.nombre, s: 'Sobre', v: kodaMonedaBusq(s.monto), go: () => navegarA('sobres.html?sobre=' + s.id) }));
+    if (sob.length) grupos.push(['Sobres', sob]);
+    const cue = (typeof cuentasDB !== 'undefined' ? cuentasDB : []).filter(c => coincide(c.apodo, c.banco)).slice(0, 4).map(c => ({ t: c.apodo, s: c.banco, v: kodaMonedaBusq(c.saldo), go: () => { if (typeof abrirModalEditarCuenta === 'function' && document.getElementById('modal-crear-cuenta')) abrirModalEditarCuenta(c.id); else navegarA('dashboard'); } }));
+    if (cue.length) grupos.push(['Cuentas', cue]);
+    const obl = (typeof compromisosDB !== 'undefined' ? compromisosDB : []).filter(c => coincide(c.nombre)).slice(0, 4).map(c => ({ t: c.nombre, s: c.tipo === 'deuda' ? 'Deuda' : 'Pago fijo', v: '', go: () => navegarA(c.tipo === 'deuda' ? 'compromisos.html?debt=' + c.id : 'compromisos') }));
+    if (obl.length) grupos.push(['Obligaciones', obl]);
+    const met = (typeof metasDB !== 'undefined' ? metasDB : []).filter(m => coincide(m.nombre)).slice(0, 4).map(m => ({ t: m.nombre, s: 'Meta', v: kodaMonedaBusq(m.montoActual), go: () => navegarA('metas.html?metaId=' + m.id) }));
+    if (met.length) grupos.push(['Metas', met]);
+    if (!grupos.length) { panel.innerHTML = '<p class="k-search__vacio">Sin resultados</p>'; panel.classList.remove('hidden'); return; }
+    let html = '';
+    grupos.forEach(([titulo, items]) => {
+        html += `<p class="k-search__grupo">${titulo}</p>`;
+        items.forEach(it => { const idx = kodaBusquedaItems.push(it) - 1; html += `<button type="button" class="k-search__item" data-i="${idx}" onclick="kodaAbrirResultado(${idx})"><span class="k-search__t">${kodaEscBusq(it.t)}</span><span class="k-search__s">${kodaEscBusq(it.s)}</span><span class="k-search__v">${kodaEscBusq(it.v)}</span></button>`; });
+    });
+    panel.innerHTML = html; panel.classList.remove('hidden');
+}
+function kodaAbrirResultado(i) { const it = kodaBusquedaItems[i]; if (!it) return; kodaCerrarBusqueda(); it.go(); }
+function kodaCerrarBusqueda() { const p = document.getElementById('k-search-panel'); if (p) p.classList.add('hidden'); const h = document.getElementById('k-header'); if (h) h.classList.remove('k-header--buscar'); }
+function kodaBuscarTecla(e) {
+    const items = [...document.querySelectorAll('#k-search-panel .k-search__item')];
+    if (e.key === 'Escape') { kodaCerrarBusqueda(); e.target.blur(); return; }
+    if (!items.length) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        kodaBusquedaSel = (kodaBusquedaSel + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length;
+        items.forEach((b, n) => b.classList.toggle('sel', n === kodaBusquedaSel));
+        items[kodaBusquedaSel].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') { e.preventDefault(); kodaAbrirResultado(kodaBusquedaSel >= 0 ? kodaBusquedaSel : 0); }
+}
+function kodaToggleBuscadorMovil() {
+    const h = document.getElementById('k-header'); if (!h) return;
+    h.classList.toggle('k-header--buscar');
+    if (h.classList.contains('k-header--buscar')) { const i = document.getElementById('k-search-input'); if (i) setTimeout(() => i.focus(), 50); }
+}
