@@ -1,0 +1,205 @@
+/* ==========================================================================
+   koda-premium.css  ·  Sistema de diseño KODA "Purple Premium"  ·  Etapa 1
+   Contiene: variables (colores, tipografía, radios, sombras, espaciado, movimiento),
+   estilos globales, componentes base (.k-*) y el remapeo de colores antiguos.
+   NO cambia estructura ni comportamiento: solo apariencia.
+   Se carga DESPUÉS de style.css. login.html y movil.html no lo usan.
+   ========================================================================== */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  /* Colores antiguos (nombres koda-*): valores fijos, siempre oscuros */
+  --kd-bg: 14 9 22;        /* #0E0916 */
+  --kd-card: 24 17 38;     /* #181126 */
+  --kd-border: 43 33 64;   /* #2B2140 */
+  --kd-muted: 180 169 208; /* #B4A9D0 */
+  --kd-steel: 169 159 198; /* #A99FC6 */
+  --kd-white: 246 243 255; /* #F6F3FF */
+  --kd-accent: 167 139 250;/* #A78BFA */
+  --kd-rose: 253 164 192;  /* #FDA4C0 */
+  --kd-mint: 110 231 183;  /* #6EE7B7 */
+  --kd-amber: 252 211 77;  /* #FCD34D */
+  --kd-gray: 123 111 153;  /* #7B6F99 */
+
+  /* Colores semánticos nuevos (siguen el tema) - TEMA OSCURO */
+  --k-bg: 14 9 22;
+  --k-surface: 24 17 38;
+  --k-raised: 33 24 58;
+  --k-text: 246 243 255;
+  --k-muted: 169 159 198;
+  --k-faint: 123 111 153;
+  --k-primary: 124 58 237;
+  --k-primary2: 167 139 250;
+  --k-lav: 205 191 255;
+  --k-mag: 232 121 249;
+  --k-mint: 110 231 183;
+  --k-rose: 253 164 192;
+  --k-amber: 252 211 77;
+  --k-line: rgb(255 255 255 / .07);
+  --k-line-strong: rgb(167 139 250 / .35);
+  --k-shadow-card: 0 20px 40px -24px rgb(0 0 0 / .6);
+  --k-shadow-pop: 0 24px 60px -20px rgb(0 0 0 / .75);
+  --k-glow: 0 12px 28px -10px rgb(139 92 246 / .7);
+  --k-grad-primary: linear-gradient(135deg, #6D28D9, #7C3AED);
+  --k-grad-cta: linear-gradient(135deg, #C026D3, #7C3AED);
+  --k-grad-hero: radial-gradient(500px 260px at 100% 0%, rgb(255 255 255 / .22), transparent 60%), linear-gradient(140deg, #5B21B6 0%, #7C3AED 45%, #A78BFA 100%);
+  --k-card-sheen: linear-gradient(180deg, rgb(255 255 255 / .035), rgb(255 255 255 / 0) 40%);
+  --k-page-glow: radial-gradient(900px 500px at 85% -5%, rgb(139 92 246 / .20), transparent 60%), radial-gradient(700px 500px at 0% 100%, rgb(167 139 250 / .08), transparent 60%);
+
+  /* Tipografía */
+  --k-font-body: Inter, system-ui, sans-serif;
+  --k-font-display: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+
+  /* Radios y espaciado (escala de 4) */
+  --k-r-sm: 12px; --k-r-md: 16px; --k-r-lg: 24px; --k-r-xl: 28px; --k-r-pill: 999px;
+  --k-s1: 4px; --k-s2: 8px; --k-s3: 12px; --k-s4: 16px; --k-s5: 20px; --k-s6: 24px; --k-s8: 32px;
+
+  /* Movimiento */
+  --k-ease: cubic-bezier(.2, .7, .2, 1);
+  --k-t: 200ms;
+}
+
+/* Tema claro: mismas variables con valores claros. Se activa solo cuando la página NO tiene la clase "dark"
+   (o dentro de un bloque con data-k-theme="light"). La app hoy es oscura fija; esto deja el tema listo. */
+html:not(.dark), [data-k-theme="light"] {
+  --k-bg: 246 243 255;
+  --k-surface: 255 255 255;
+  --k-raised: 240 234 252;
+  --k-text: 28 17 40;
+  --k-muted: 94 82 120;
+  --k-faint: 124 113 148;
+  --k-primary: 109 40 217;
+  --k-primary2: 124 58 237;
+  --k-lav: 91 33 182;
+  --k-mag: 162 28 175;
+  --k-mint: 4 120 87;
+  --k-rose: 190 24 93;
+  --k-amber: 146 64 14;
+  --k-line: rgb(42 22 53 / .10);
+  --k-line-strong: rgb(124 58 237 / .40);
+  --k-shadow-card: 0 18px 36px -24px rgb(60 30 110 / .35);
+  --k-shadow-pop: 0 24px 60px -24px rgb(60 30 110 / .45);
+  --k-glow: 0 12px 28px -12px rgb(124 58 237 / .55);
+  --k-card-sheen: linear-gradient(180deg, rgb(255 255 255 / .6), rgb(255 255 255 / 0) 40%);
+  --k-page-glow: radial-gradient(900px 500px at 85% -5%, rgb(167 139 250 / .25), transparent 60%);
+}
+
+/* ---------- 2. Estilos globales (solo apariencia) ---------- */
+html { background-color: rgb(var(--kd-bg)); }
+body { background-image: var(--k-page-glow); background-attachment: fixed; background-repeat: no-repeat; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+h1, h2, h3, h4 { font-family: var(--k-font-display); letter-spacing: -.02em; }
+.k-display { font-family: var(--k-font-display); letter-spacing: -.02em; }
+.k-num { font-family: var(--k-font-display); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+::selection { background: rgb(167 139 250 / .35); color: #fff; }
+
+/* ---------- 3. Componentes base (se usan en las etapas siguientes) ---------- */
+/* Tarjetas: 3 niveles de profundidad */
+.k-card { background: var(--k-card-sheen), rgb(var(--k-surface)); border: 1px solid var(--k-line); border-radius: var(--k-r-lg); padding: var(--k-s6); box-shadow: var(--k-shadow-card); transition: transform var(--k-t) var(--k-ease), box-shadow var(--k-t) var(--k-ease), border-color var(--k-t) var(--k-ease); }
+.k-card--flat { background: rgb(var(--k-bg)); box-shadow: none; }
+.k-card--raised, .k-card--selected { background: linear-gradient(180deg, rgb(139 92 246 / .14), rgb(255 255 255 / 0) 60%), rgb(var(--k-raised)); box-shadow: inset 0 0 0 1.5px var(--k-line-strong), 0 24px 48px -22px rgb(139 92 246 / .7); border-color: transparent; }
+.k-card--hero { background: var(--k-grad-hero); border: 0; color: #fff; box-shadow: 0 30px 60px -28px rgb(124 58 237 / .9), inset 0 1px 0 rgb(255 255 255 / .25); position: relative; overflow: hidden; }
+.k-card--interactive { cursor: pointer; }
+.k-card--interactive:hover { transform: translateY(-2px); border-color: var(--k-line-strong); }
+.k-card--interactive:active { transform: translateY(0) scale(.995); }
+
+/* Botones */
+.k-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--k-s2); border: 0; border-radius: var(--k-r-md); padding: 12px 18px; font: 600 14px/1 var(--k-font-display); color: #fff; cursor: pointer; user-select: none; transition: transform var(--k-t) var(--k-ease), filter var(--k-t) var(--k-ease), box-shadow var(--k-t) var(--k-ease), background-color var(--k-t) var(--k-ease); }
+.k-btn:focus-visible { outline: 2px solid rgb(var(--k-primary2) / .8); outline-offset: 2px; }
+.k-btn:disabled, .k-btn[aria-disabled="true"] { opacity: .4; cursor: not-allowed; box-shadow: none; transform: none; filter: none; }
+.k-btn--primary { background: var(--k-grad-primary); box-shadow: var(--k-glow), inset 0 1px 0 rgb(255 255 255 / .25); }
+.k-btn--primary:hover:not(:disabled) { filter: brightness(1.12); transform: translateY(-1px); }
+.k-btn--primary:active:not(:disabled) { filter: brightness(.92); transform: scale(.97); }
+.k-btn--cta { background: var(--k-grad-cta); box-shadow: 0 12px 28px -10px rgb(192 38 211 / .7), inset 0 1px 0 rgb(255 255 255 / .25); }
+.k-btn--cta:hover:not(:disabled) { filter: brightness(1.12); transform: translateY(-1px); }
+.k-btn--cta:active:not(:disabled) { filter: brightness(.92); transform: scale(.97); }
+.k-btn--secondary { background: rgb(var(--k-raised)); color: rgb(var(--k-text)); box-shadow: inset 0 0 0 1px var(--k-line); }
+.k-btn--secondary:hover:not(:disabled) { box-shadow: inset 0 0 0 1px var(--k-line-strong); transform: translateY(-1px); }
+.k-btn--secondary:active:not(:disabled) { transform: scale(.97); }
+.k-btn--ghost { background: transparent; color: rgb(var(--k-lav)); }
+.k-btn--ghost:hover:not(:disabled) { background: rgb(139 92 246 / .12); }
+.k-btn--danger { background: rgb(var(--k-rose) / .12); color: rgb(var(--k-rose)); }
+.k-btn--danger:hover:not(:disabled) { background: rgb(var(--k-rose) / .2); }
+.k-btn--sm { padding: 9px 14px; font-size: 12.5px; border-radius: var(--k-r-sm); }
+.k-btn--lg { padding: 15px 24px; font-size: 15px; }
+.k-btn--block { width: 100%; }
+.k-btn--icon { width: 44px; height: 44px; padding: 0; border-radius: var(--k-r-md); background: rgb(var(--k-surface)); color: rgb(var(--k-muted)); box-shadow: inset 0 0 0 1px var(--k-line); }
+.k-btn--icon:hover:not(:disabled) { color: rgb(var(--k-text)); box-shadow: inset 0 0 0 1px var(--k-line-strong); }
+
+/* Chips (etiquetas de estado) */
+.k-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: var(--k-r-pill); font: 600 12px/1.2 var(--k-font-display); background: rgb(139 92 246 / .18); color: rgb(var(--k-lav)); white-space: nowrap; }
+.k-chip--ok { background: rgb(var(--k-mint) / .12); color: rgb(var(--k-mint)); }
+.k-chip--warn { background: rgb(var(--k-amber) / .12); color: rgb(var(--k-amber)); }
+.k-chip--alert { background: rgb(var(--k-rose) / .12); color: rgb(var(--k-rose)); }
+.k-chip--neutral { background: rgb(var(--k-text) / .07); color: rgb(var(--k-muted)); }
+
+/* Iconos dentro de un contenedor suave */
+.k-ico { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 13px; background: rgb(139 92 246 / .16); color: rgb(var(--k-lav)); box-shadow: inset 0 0 0 1px rgb(167 139 250 / .18); }
+.k-ico--ok { background: rgb(var(--k-mint) / .12); color: rgb(var(--k-mint)); box-shadow: inset 0 0 0 1px rgb(var(--k-mint) / .18); }
+.k-ico--alert { background: rgb(var(--k-rose) / .12); color: rgb(var(--k-rose)); box-shadow: inset 0 0 0 1px rgb(var(--k-rose) / .18); }
+.k-ico--warn { background: rgb(var(--k-amber) / .12); color: rgb(var(--k-amber)); box-shadow: inset 0 0 0 1px rgb(var(--k-amber) / .18); }
+.k-ico--sm { width: 34px; height: 34px; border-radius: 11px; }
+.k-ico--lg { width: 52px; height: 52px; border-radius: 16px; }
+
+/* Barra de progreso */
+.k-bar { height: 8px; border-radius: var(--k-r-pill); background: rgb(var(--k-text) / .08); overflow: hidden; }
+.k-bar > i { display: block; height: 100%; border-radius: var(--k-r-pill); background: linear-gradient(90deg, #7C3AED, #B79CFF); transition: width 600ms var(--k-ease); }
+.k-bar--warn > i { background: linear-gradient(90deg, #F59E0B, #FCD34D); }
+.k-bar--cta > i { background: linear-gradient(90deg, #C026D3, #7C3AED); }
+
+/* Pestañas y selector tipo píldora */
+.k-tabs { display: inline-flex; gap: 4px; padding: 5px; border-radius: var(--k-r-md); background: rgb(var(--k-surface)); border: 1px solid var(--k-line); }
+.k-tab { display: inline-flex; align-items: center; gap: 9px; padding: 10px 18px; border-radius: var(--k-r-sm); font: 600 14px/1 var(--k-font-display); color: rgb(var(--k-muted)); cursor: pointer; transition: color var(--k-t) var(--k-ease), background-color var(--k-t) var(--k-ease); }
+.k-tab:hover { color: rgb(var(--k-text)); }
+.k-tab[aria-selected="true"], .k-tab.is-active { background: linear-gradient(135deg, rgb(192 38 211 / .35), rgb(124 58 237 / .35)); color: #fff; box-shadow: inset 0 0 0 1px rgb(232 121 249 / .4); }
+.k-tab__count { background: rgb(var(--k-text) / .1); border-radius: var(--k-r-pill); padding: 1px 9px; font-size: 11px; }
+.k-seg { display: inline-flex; padding: 4px; gap: 2px; border-radius: var(--k-r-sm); background: rgb(var(--k-bg)); }
+.k-seg > * { padding: 6px 13px; border-radius: 9px; font: 600 12px/1 var(--k-font-display); color: rgb(var(--k-muted)); cursor: pointer; }
+.k-seg > .is-active { background: rgb(var(--k-raised)); color: rgb(var(--k-text)); box-shadow: inset 0 0 0 1px var(--k-line); }
+
+/* Filas de lista y encabezados de tabla */
+.k-row { display: flex; align-items: center; gap: 14px; padding: 12px 10px; margin: 0 -10px; border-radius: var(--k-r-md); transition: background-color var(--k-t) var(--k-ease); }
+.k-row:hover { background: rgb(var(--k-text) / .04); }
+.k-th { color: rgb(var(--k-faint)); font: 600 11.5px/1 var(--k-font-display); text-transform: uppercase; letter-spacing: .06em; }
+
+/* Campos de formulario (para usar en las etapas siguientes) */
+.k-input { width: 100%; background: rgb(var(--k-bg)); color: rgb(var(--k-text)); border: 1px solid var(--k-line); border-radius: var(--k-r-md); padding: 13px 16px; font: 500 14px var(--k-font-body); transition: border-color var(--k-t) var(--k-ease), box-shadow var(--k-t) var(--k-ease); }
+.k-input::placeholder { color: rgb(var(--k-faint)); }
+.k-input:hover { border-color: rgb(var(--k-text) / .18); }
+.k-input:focus { outline: none; border-color: rgb(var(--k-primary2) / .7); box-shadow: 0 0 0 3px rgb(139 92 246 / .22); }
+.k-input[aria-invalid="true"] { border-color: rgb(var(--k-rose) / .7); }
+
+/* Etiquetas de texto */
+.k-label { color: rgb(var(--k-muted)); font: 500 13px/1.3 var(--k-font-body); }
+.k-link { color: rgb(var(--k-primary2)); font: 600 13px/1 var(--k-font-display); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+
+/* Movimiento: respeta la preferencia "reducir movimiento" del sistema (solo en componentes .k-*) */
+@media (prefers-reduced-motion: reduce) {
+  .k-card, .k-btn, .k-tab, .k-row, .k-input, .k-bar > i { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .k-card--interactive:hover, .k-btn:hover { transform: none !important; }
+}
+
+/* ---- Remapeo de colores fijos antiguos a la paleta Purple Premium (sin tocar el HTML) ---- */
+.bg-\[\#1f0f28\]{background-color:rgb(15 10 25)!important}
+.bg-\[\#22112b\]\/80{background-color:rgb(7 4 12 / 0.8)!important}
+.bg-\[\#2a1635\]{background-color:rgb(14 9 22)!important}
+.bg-\[\#2a1635\]\/10{background-color:rgb(14 9 22 / 0.1)!important}
+.bg-\[\#2a1635\]\/20{background-color:rgb(14 9 22 / 0.2)!important}
+.bg-\[\#331a3f\]{background-color:rgb(33 24 58)!important}
+.bg-\[\#341b40\]{background-color:rgb(29 21 48)!important}
+.bg-\[\#3e2150\]{background-color:rgb(42 31 69)!important}
+.bg-\[\#b168d9\]{background-color:rgb(167 139 250)!important}
+.bg-\[\#b168d9\]\/10{background-color:rgb(167 139 250 / 0.1)!important}
+.border-\[\#2a1635\]\/30{border-color:rgb(14 9 22 / 0.3)!important}
+.border-\[\#b168d9\]{border-color:rgb(167 139 250)!important}
+.border-\[\#b168d9\]\/20{border-color:rgb(167 139 250 / 0.2)!important}
+.border-\[\#b168d9\]\/30{border-color:rgb(167 139 250 / 0.3)!important}
+.dark .dark\:bg-\[\#341b40\]{background-color:rgb(29 21 48)!important}
+.group:hover .group-hover\:bg-\[\#2a1635\]{background-color:rgb(14 9 22)!important}
+.group:hover .group-hover\:text-\[\#b168d9\]{color:rgb(167 139 250)!important}
+.hover\:bg-\[\#3e2150\]:hover{background-color:rgb(42 31 69)!important}
+.hover\:bg-\[\#c384e4\]:hover{background-color:rgb(188 166 255)!important}
+.hover\:border-\[\#2a1635\]\/30:hover{border-color:rgb(14 9 22 / 0.3)!important}
+.hover\:border-\[\#b168d9\]\/50:hover{border-color:rgb(167 139 250 / 0.5)!important}
+.text-\[\#2a1635\]{color:rgb(14 9 22)!important}
+.text-\[\#2a1635\]\/70{color:rgb(14 9 22 / 0.7)!important}
+.text-\[\#b168d9\]{color:rgb(167 139 250)!important}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>KODA - Guía de diseño</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Maven+Pro:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="koda-premium.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind-config.premium.js"></script>
+    <script src="koda-icons.js"></script>
+    <style>
+        .g-wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 80px; }
+        .g-sec { margin-top: 40px; }
+        .g-sec > h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .g-sec > p { color: rgb(var(--k-muted)); margin-bottom: 18px; font-size: 14px; }
+        .g-grid { display: grid; gap: 16px; }
+        .g-sw { height: 72px; border-radius: 16px; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .08); }
+        .g-themebox { border-radius: 28px; padding: 28px; background: rgb(var(--k-bg)); color: rgb(var(--k-text)); border: 1px solid var(--k-line); }
+        .g-code { font-family: ui-monospace, monospace; font-size: 11.5px; color: rgb(var(--k-faint)); }
+    </style>
+</head>
+<body class="bg-k-bg text-k-text font-sans">
+<div class="g-wrap">
+    <div class="k-display" style="font-weight:800;font-size:34px;letter-spacing:-1px">KODA<span style="color:rgb(var(--k-primary2))">.</span></div>
+    <h1 style="font-size:30px;font-weight:700;margin-top:6px">Guía de diseño · Purple Premium</h1>
+    <p class="k-label" style="margin-top:6px">Página de referencia del sistema visual (Etapa 1). No forma parte de la app ni se enlaza desde el menú.</p>
+
+    <section class="g-sec"><h2>Colores</h2><p>Se muestran los dos temas lado a lado. La app usa hoy el tema oscuro.</p>
+        <div class="g-grid" style="grid-template-columns:repeat(auto-fit,minmax(420px,1fr))">
+            <div class="g-themebox" id="tema-oscuro"><b class="k-display">Tema oscuro (principal)</b><div class="g-grid" style="grid-template-columns:repeat(4,1fr);margin-top:16px" data-sw></div></div>
+            <div class="g-themebox" data-k-theme="light" id="tema-claro"><b class="k-display">Tema claro (preparado)</b><div class="g-grid" style="grid-template-columns:repeat(4,1fr);margin-top:16px" data-sw></div></div>
+        </div>
+    </section>
+
+    <section class="g-sec"><h2>Tipografía</h2><p>Plus Jakarta Sans para títulos y cantidades. Inter para textos.</p>
+        <div class="k-card">
+            <div class="k-num" style="font-size:52px;font-weight:800;line-height:1">$26,243.00</div>
+            <div class="k-label" style="margin:6px 0 20px">Cantidad grande · Plus Jakarta Sans 800</div>
+            <h2 style="font-size:24px;font-weight:700">Título de sección</h2>
+            <div class="k-label" style="margin:4px 0 16px">Título · Plus Jakarta Sans 700</div>
+            <p style="font-size:14px;line-height:1.6;color:rgb(var(--k-muted))">Texto de descripción y detalles en Inter. Sobrio, claro y fácil de leer en tamaños pequeños.</p>
+        </div>
+    </section>
+
+    <section class="g-sec"><h2>Botones</h2><p>Normal, hover, presionado, inactivo y tamaños.</p>
+        <div class="k-card">
+            <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:18px">
+                <button class="k-btn k-btn--primary" data-i="plus">Nuevo movimiento</button>
+                <button class="k-btn k-btn--primary" style="filter:brightness(1.12);transform:translateY(-1px)">Hover</button>
+                <button class="k-btn k-btn--primary" style="filter:brightness(.92);transform:scale(.97)">Presionado</button>
+                <button class="k-btn k-btn--primary" disabled>Inactivo</button>
+                <button class="k-btn k-btn--cta" data-i="plus">Nuevo</button>
+            </div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+                <button class="k-btn k-btn--secondary" data-i="refresh-cw">Secundario</button>
+                <button class="k-btn k-btn--ghost">Texto</button>
+                <button class="k-btn k-btn--danger" data-i="trash-2">Eliminar</button>
+                <button class="k-btn k-btn--primary k-btn--sm">Pequeño</button>
+                <button class="k-btn k-btn--primary k-btn--lg">Grande</button>
+                <button class="k-btn k-btn--icon" aria-label="Notificaciones" data-i="bell" data-only></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="g-sec"><h2>Tarjetas, chips, barras y pestañas</h2><p>Tres niveles de profundidad y los estados de color.</p>
+        <div class="g-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+            <div class="k-card k-card--flat"><b class="k-display">Nivel 0 · Fondo</b><p class="k-label" style="margin-top:6px">Sin sombra.</p></div>
+            <div class="k-card k-card--interactive"><b class="k-display">Nivel 1 · Tarjeta</b><p class="k-label" style="margin-top:6px">Pasa el cursor: sube un poco.</p></div>
+            <div class="k-card k-card--raised"><b class="k-display">Nivel 2 · Destacada</b><p class="k-label" style="margin-top:6px">Para lo que importa.</p></div>
+        </div>
+        <div class="k-card">
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px"><span class="k-chip">Información</span><span class="k-chip k-chip--ok">Pagado</span><span class="k-chip k-chip--warn">Pendiente</span><span class="k-chip k-chip--alert">Atención</span><span class="k-chip k-chip--neutral">Neutro</span></div>
+            <div class="g-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px"><div class="k-bar"><i style="width:63%"></i></div><div class="k-bar k-bar--warn"><i style="width:30%"></i></div><div class="k-bar k-bar--cta"><i style="width:80%"></i></div></div>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center"><div class="k-tabs"><span class="k-tab is-active">Pagos fijos <span class="k-tab__count">3</span></span><span class="k-tab">Deudas <span class="k-tab__count">1</span></span><span class="k-tab">Por cobrar <span class="k-tab__count">1</span></span></div><div class="k-seg"><span>1M</span><span>3M</span><span class="is-active">6M</span><span>1A</span></div></div>
+            <div style="margin-top:20px;max-width:360px"><input class="k-input" placeholder="Campo de texto"></div>
+        </div>
+    </section>
+
+    <section class="g-sec"><h2>Iconos (Lucide)</h2><p>Trazo 1.8, dentro de un contenedor suave del color de su categoría.</p>
+        <div class="k-card"><div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px" id="iconos-estados"></div><div class="g-grid" style="grid-template-columns:repeat(auto-fill,minmax(96px,1fr))" id="iconos-todos"></div></div>
+    </section>
+</div>
+<script>
+(function () {
+    // Botones con icono
+    document.querySelectorAll('[data-i]').forEach(function (b) { var ic = kodaIcon(b.getAttribute('data-i'), { size: 18 }); b.innerHTML = b.hasAttribute('data-only') ? ic : ic + b.textContent; });
+    // Muestras de color
+    var muestras = [['Fondo','bg'],['Tarjeta','surface'],['Elevada','raised'],['Texto','text'],['Suave','muted'],['Primario','primary2'],['Lavanda','lav'],['Magenta','mag'],['Menta (ok)','mint'],['Rosa (alerta)','rose'],['Ámbar (pendiente)','amber'],['Tenue','faint']];
+    document.querySelectorAll('[data-sw]').forEach(function (g) { g.innerHTML = muestras.map(function (m) { return '<div><div class="g-sw" style="background:rgb(var(--k-' + m[1] + '))"></div><div style="font:600 12px var(--k-font-display);margin-top:8px">' + m[0] + '</div><div class="g-code">--k-' + m[1] + '</div></div>'; }).join(''); });
+    // Iconos
+    var est = [['wallet-cards',''],['circle-check-big','ok'],['triangle-alert','warn'],['trending-down','alert']];
+    document.getElementById('iconos-estados').innerHTML = est.map(function (e) { return '<div class="k-ico k-ico--lg' + (e[1] ? ' k-ico--' + e[1] : '') + '">' + kodaIcon(e[0], { size: 24 }) + '</div>'; }).join('');
+    document.getElementById('iconos-todos').innerHTML = KodaIcons.lista().map(function (n) { return '<div style="text-align:center"><div class="k-ico" style="margin:0 auto">' + kodaIcon(n, { size: 20 }) + '</div><div class="g-code" style="margin-top:6px">' + n + '</div></div>'; }).join('');
+})();
+</script>
+</body>
+</html>
