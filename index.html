@@ -109,12 +109,12 @@
                         </div>
                     </div>
                     <div class="w-full relative -mx-2 mt-4">
-                        <div id="chart-comparativa" class="w-full h-[290px]"></div>
+                        <div id="chart-comparativa" class="w-full h-[310px]"></div>
                     </div>
                 </div>
                 
                 <!-- Sobres Activos -->
-                <div class="w-full mt-4">
+                <div class="w-full mt-8">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-xl font-semibold cursor-pointer select-none" onclick="navegarA('sobres')">Active envelopes</h3>
                         <button onclick="navegarA('sobres')" class="text-[11.5px] font-semibold text-koda-blue cursor-pointer select-none relative inline-flex items-center gap-1 overflow-visible after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:origin-bottom-left hover:after:scale-x-100">
@@ -284,7 +284,7 @@
 
             if (sobresMostrar.length === 0) {
                 cont.innerHTML = `
-                <div class="col-span-full flex flex-col items-center justify-center p-6 bg-koda-darkBg rounded-[1.5rem] border border-dashed border-koda-darkBorder">
+                <div style="grid-column:1/-1" class="col-span-full flex flex-col items-center justify-center p-6 bg-koda-darkBg rounded-[1.5rem] border border-dashed border-koda-darkBorder">
                     <span class="material-symbols-outlined text-koda-textMuted mb-2 text-3xl">inbox</span>
                     <p class="text-sm font-semibold text-koda-textMuted">No active envelopes.</p>
                 </div>`;
