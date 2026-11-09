@@ -690,7 +690,9 @@
             if (!cmpEl('cmp-vista')) return; 
             cmpSincronizarPrestamos();
 
-            const ingresos = historialDB.filter(m => m.tipo === 'Ingreso').reduce((s, m) => s + m.monto, 0) || 1;
+            const ingresosReal = historialDB.filter(m => m.tipo === 'Ingreso').reduce((s, m) => s + m.monto, 0);
+            const hayIngresos = ingresosReal > 0;
+            const ingresos = ingresosReal || 1;
             const fijos = compromisosDB.filter(c => c.tipo === 'fijo');
             const deudas = compromisosDB.filter(c => c.tipo === 'deuda');
             const activos = prestamosDB.filter(p => cmpBalance(p) > 0);
@@ -703,9 +705,11 @@
 
             cmpEl('cmp-kpi-fijos').innerText = cmpMoney(totFijos);
             const cmpEnBackups = cmpBkTotal();
-            cmpEl('cmp-kpi-fijos-sub').innerText = `${pctFijos}% of income${cmpEnBackups > 0 ? ' · ' + cmpMoney2(cmpEnBackups) + ' in backups' : ''}`;
+            cmpEl('cmp-kpi-fijos-sub').innerText = hayIngresos
+                ? `${pctFijos}% of income${cmpEnBackups > 0 ? ' · ' + cmpMoney2(cmpEnBackups) + ' in backups' : ''}`
+                : (cmpEnBackups > 0 ? `${cmpMoney2(cmpEnBackups)} in backups` : '');
             cmpEl('cmp-kpi-deudas').innerText = cmpMoney(totDeudas);
-            cmpEl('cmp-kpi-deudas-sub').innerText = `${deudas.length} ${deudas.length === 1 ? 'debt' : 'debts'} · ${pctDeudas}% of income`;
+            cmpEl('cmp-kpi-deudas-sub').innerText = `${deudas.length} ${deudas.length === 1 ? 'debt' : 'debts'}${hayIngresos ? ' · ' + pctDeudas + '% of income' : ''}`;
             cmpEl('cmp-kpi-cobrar').innerText = cmpMoney(totCobrar);
             cmpEl('cmp-kpi-cobrar-sub').innerText = `${activos.length} active`;
 
@@ -724,7 +728,7 @@
             cmpRenderListaOrden();
 
             const vista = cmpEl('cmp-vista');
-            if (cmpTab === 'fijo') vista.innerHTML = cmpHtmlFijos(cmpItemsTab('fijo'), pctFijos);
+            if (cmpTab === 'fijo') vista.innerHTML = cmpHtmlFijos(cmpItemsTab('fijo'), hayIngresos ? pctFijos : null);
             else if (cmpTab === 'deuda') vista.innerHTML = cmpHtmlDeudas(cmpItemsTab('deuda'));
             else vista.innerHTML = cmpHtmlPrestamos(cmpItemsTab('prestamo'));
 
@@ -769,7 +773,7 @@
             <div class="bg-koda-darkCard border border-koda-darkBorder rounded-[1.5rem] shadow-sm overflow-hidden">
                 <div id="cmp-lista-fijos" class="divide-y divide-white/5">${filas}</div>
                 <div class="px-6 py-4 bg-[#331a3f] flex justify-between items-center border-t border-white/5">
-                    <span class="text-[11.5px] font-semibold text-koda-steel">Total (${pctIngreso}% of income)</span>
+                    <span class="text-[11.5px] font-semibold text-koda-steel">${pctIngreso === null ? 'Total' : 'Total (' + pctIngreso + '% of income)'}</span>
                     <span class="text-base font-semibold text-koda-blue">${cmpMoney(total)}</span>
                 </div>
             </div>`;

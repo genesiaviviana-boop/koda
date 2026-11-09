@@ -209,6 +209,8 @@
         [/^(.+) is fully funded\. Mark it complete\.$/, function (m) { return m[1] + ' está completa. Márcala como lograda.'; }],
         [/^(.+) is (.+) short\.$/, function (m) { return 'A ' + m[1] + ' le faltan ' + m[2] + '.'; }],
         [/^(\d+)% complete this period$/, function (m) { return m[1] + '% completado en este período'; }],
+        [/^(\$[\d,.]+) in backups$/, function (m) { return m[1] + ' en respaldos'; }],
+        [/^(\d+) (debts?)$/, function (m) { return m[1] + (m[1] === '1' ? ' deuda' : ' deudas'); }],
         [/^(\d+)% of income$/, function (m) { return m[1] + '% del ingreso'; }],
         [/^(\d+) (debts?) · (\d+)% of income$/, function (m) { return m[1] + (m[1] === '1' ? ' deuda' : ' deudas') + ' · ' + m[3] + '% del ingreso'; }],
         [/^(\d+)% of income · (.+) in backups$/, function (m) { return m[1] + '% del ingreso · ' + m[2] + ' en respaldos'; }],
