@@ -73,7 +73,7 @@
         'Affects net available': 'Afecta el disponible', 'Cobro': 'Cobro',
 
         // Sobres
-        'New envelope': 'Sobre nuevo', 'Total assigned': 'Total asignado', 'To fund': 'Por fondear', 'Funded': 'Fondeado', 'Active Allocation': 'Asignación activa',
+        'New envelope': 'Sobre nuevo', 'Total assigned': 'Total asignado', 'To fund': 'Por fondear', 'Funded': 'Fondeado', 'Overspent': 'Sobregirado', 'Active Allocation': 'Asignación activa',
         'Most funded first': 'Más fondeados primero', 'Sort by': 'Ordenar por', 'Least funded first': 'Menos fondeados primero', 'Alphabetical A-Z': 'Alfabético A-Z',
         'Custom order': 'Orden personalizado', 'Highest amount': 'Mayor monto', 'Lowest amount': 'Menor monto', 'Unpaid first': 'Pendientes primero',
         'Highest balance': 'Mayor saldo', 'Lowest balance': 'Menor saldo', 'Most paid': 'Más pagado',
