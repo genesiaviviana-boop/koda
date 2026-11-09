@@ -1,0 +1,80 @@
+<!-- [NAV-01] BARRA DE NAVEGACIÓN ALINEADA -->
+<nav class="w-full max-w-[1500px] flex justify-between items-center mb-8 relative mx-auto px-2">
+    
+    <!-- Logo e Identidad (CSS Puro, Maven Pro Black) -->
+    <div class="flex items-center cursor-pointer select-none" onclick="navegarA('dashboard')">
+        <span class="text-gray-900 dark:text-white text-3xl md:text-4xl" style="font-family: 'Maven Pro', sans-serif; font-weight: 900; letter-spacing: -0.05em;">
+            KODA<span class="text-koda-blue">.</span>
+        </span>
+    </div>
+
+    <!-- Menú Central Flotante (Apple Sliding Pill Style) -->
+    <div class="hidden md:flex relative bg-koda-lightCard dark:bg-koda-darkCard border border-gray-200 dark:border-koda-darkBorder rounded-full p-1 shadow-sm items-center">
+        
+        <!-- El Slider Animado (La píldora de fondo) -->
+        <div id="nav-slider" class="absolute top-1 bottom-1 left-0 bg-gray-200 dark:bg-koda-darkBg rounded-full transition-all duration-300 ease-out pointer-events-none" style="width: 0px; transform: translateX(0px);"></div>
+
+        <!-- Enlaces / Pestañas -->
+        <button id="nav-btn-dashboard" onclick="animarYNavegar(this, 'dashboard')" class="nav-item relative z-10 px-6 py-2 text-sm font-semibold text-koda-textMuted hover:text-gray-900 dark:hover:text-white transition-colors duration-300">Dashboard</button>
+        <button id="nav-btn-sobres" onclick="animarYNavegar(this, 'sobres')" class="nav-item relative z-10 px-6 py-2 text-sm font-semibold text-koda-textMuted hover:text-gray-900 dark:hover:text-white transition-colors duration-300">Envelopes</button>
+        <button id="nav-btn-compromisos" onclick="animarYNavegar(this, 'compromisos')" class="nav-item relative z-10 px-6 py-2 text-sm font-semibold text-koda-textMuted hover:text-gray-900 dark:hover:text-white transition-colors duration-300">Obligations</button>
+        <button id="nav-btn-metas" onclick="animarYNavegar(this, 'metas')" class="nav-item relative z-10 px-6 py-2 text-sm font-semibold text-koda-textMuted hover:text-gray-900 dark:hover:text-white transition-colors duration-300">Goals</button>
+        <button id="nav-btn-checkpay" onclick="animarYNavegar(this, 'checkpay')" class="nav-item relative z-10 px-6 py-2 text-sm font-semibold text-koda-textMuted hover:text-gray-900 dark:hover:text-white transition-colors duration-300">Check Pay</button>
+    </div>
+
+    <!-- Acciones de la Derecha (Solo Notificaciones) -->
+    <div class="flex items-center gap-4">
+        <button id="btn-asistente" type="button" onclick="toggleAsistente()" title="Ask KODA" class="koda-orb-btn">
+            <span class="koda-orb"></span><span class="koda-orb-ring"></span>
+        </button>
+        <div class="relative">
+            <button onclick="toggleNotificaciones()" class="w-10 h-10 bg-koda-lightCard dark:bg-koda-darkCard border border-gray-200 dark:border-koda-darkBorder rounded-full flex items-center justify-center relative hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">notifications</span>
+                <span id="badge-notif" class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-koda-blue rounded-full border-2 border-white dark:border-koda-darkBg hidden animate-pulse"></span>
+            </button>
+            <div id="panel-notificaciones" class="hidden absolute right-0 mt-3 w-80 bg-[#331a3f] border border-white/10 rounded-2xl shadow-2xl p-3 z-50 backdrop-blur-md" onclick="event.stopPropagation()">
+                <div class="flex items-center justify-between pb-2 mb-2 border-b border-white/5 px-1">
+                    <span class="text-[11.5px] font-semibold text-koda-steel">Notifications</span>
+                    <div class="flex items-center gap-3">
+                        <button type="button" onclick="marcarNotificacionesLeidas()" class="text-[11px] font-semibold text-koda-blue hover:text-white transition-colors cursor-pointer outline-none">Mark all read</button>
+                        <button type="button" onclick="limpiarNotificaciones()" class="text-[11px] font-semibold text-koda-steel hover:text-white transition-colors cursor-pointer outline-none">Clear</button>
+                    </div>
+                </div>
+                <div id="lista-notificaciones" class="flex flex-col gap-1 max-h-[360px] overflow-y-auto no-scrollbar"></div>
+            </div>
+        </div>
+        <button type="button" onclick="kodaConfirmar('Sign out', 'You will need your access key to sign in again on this device.', () => kodaCerrarSesion(), 'Sign out', 'logout')" title="Sign out" class="w-10 h-10 bg-koda-lightCard dark:bg-koda-darkCard border border-gray-200 dark:border-koda-darkBorder rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer outline-none">
+            <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">logout</span>
+        </button>
+    </div>
+</nav>
+
+<!-- [NAV-02] CHAT FLOTANTE DEL ASISTENTE -->
+<div id="panel-asistente" class="hidden fixed top-[88px] right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[540px] max-h-[calc(100vh-110px)] bg-[#331a3f] border border-white/10 rounded-[1.5rem] shadow-2xl flex-col overflow-hidden" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-white/5">
+        <div class="flex items-center gap-2.5">
+            <span class="koda-orb sm"></span>
+            <span class="text-[15px] font-semibold tracking-tight">Ask KODA</span>
+        </div>
+        <div class="flex items-center gap-1">
+            <button type="button" onclick="nuevoChatAsistente()" title="New chat" class="w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center text-koda-steel hover:text-white transition-colors cursor-pointer outline-none">
+                <span class="material-symbols-outlined text-[19px]">edit_square</span>
+            </button>
+            <button type="button" onclick="cerrarAsistente()" title="Close" class="w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center text-koda-steel hover:text-white transition-colors cursor-pointer outline-none">
+                <span class="material-symbols-outlined text-[19px]">close</span>
+            </button>
+        </div>
+    </div>
+    <div id="asistente-mensajes" class="flex-1 overflow-y-auto no-scrollbar px-4 py-4 flex flex-col gap-3 select-text"></div>
+    <form onsubmit="enviarAsistente(event)" class="px-4 pb-4 pt-2">
+        <div class="bg-[#1f0f28] border border-white/5 rounded-2xl pl-4 pr-2 py-2 flex items-end gap-2 focus-within:border-koda-blue/50 transition-colors">
+            <div class="flex-1 min-w-0 flex flex-col gap-0.5 py-1">
+                <span class="text-[11.5px] font-semibold text-koda-steel">Message</span>
+                <textarea id="asistente-entrada" rows="1" maxlength="1500" onkeydown="teclaAsistente(event)" oninput="ajustarEntradaAsistente()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none resize-none max-h-24 select-text"></textarea>
+            </div>
+            <button type="submit" id="asistente-enviar" class="w-9 h-9 mb-0.5 rounded-full bg-koda-blue text-[#2a1635] hover:bg-[#c384e4] flex items-center justify-center transition-colors cursor-pointer outline-none flex-shrink-0">
+                <span class="material-symbols-outlined text-[19px]">arrow_upward</span>
+            </button>
+        </div>
+    </form>
+</div>
