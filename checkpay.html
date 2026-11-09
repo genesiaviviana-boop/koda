@@ -151,7 +151,7 @@
                 <!-- Monto hero -->
                 <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl p-4 flex flex-col items-center justify-center gap-1 transition-colors">
                     <span class="text-xs text-koda-textMuted">Amount</span>
-                    <input type="number" id="cp-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center border-none outline-none">
+                    <input type="number" step="any" inputmode="decimal" id="cp-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center border-none outline-none">
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-2 border-t border-white/5">
@@ -226,7 +226,7 @@
 
         // ---------- Utilidades ----------
         const cpEl = (id) => document.getElementById(id);
-        const cpMoney = (n) => `$${(Number(n) || 0).toLocaleString()}`;
+        const cpMoney = (n) => `$${(Number(n) || 0).toLocaleString('en-US')}`;
         const cpEsc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const cpNuevoId = () => ++cpSeq;
 

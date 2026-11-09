@@ -147,11 +147,11 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 1 amount</span>
-                        <input type="number" id="cmp-bill-q1" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-bill-q1" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 2 amount</span>
-                        <input type="number" id="cmp-bill-q2" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-bill-q2" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                 </div>
 
@@ -198,22 +198,22 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Total debt</span>
-                        <input type="number" id="cmp-debt-total" onwheel="this.blur()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-debt-total" onwheel="this.blur()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Remaining balance</span>
-                        <input type="number" id="cmp-debt-actual" onwheel="this.blur()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-debt-actual" onwheel="this.blur()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 1 payment</span>
-                        <input type="number" id="cmp-debt-q1" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-debt-q1" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-white/20 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 2 payment</span>
-                        <input type="number" id="cmp-debt-q2" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
+                        <input type="number" step="any" inputmode="decimal" id="cmp-debt-q2" onwheel="this.blur()" oninput="cmpBkTop()" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none">
                     </div>
                 </div>
 
@@ -276,7 +276,7 @@
 
                 <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl p-4 flex flex-col items-center justify-center gap-1 transition-colors">
                     <span class="text-[11.5px] font-semibold text-koda-steel">Amount lent</span>
-                    <input type="number" id="cmp-loan-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
+                    <input type="number" step="any" inputmode="decimal" id="cmp-loan-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -399,7 +399,7 @@
 
                 <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl p-4 flex flex-col items-center justify-center gap-1 transition-colors">
                     <span class="text-[11.5px] font-semibold text-koda-steel">Amount</span>
-                    <input type="number" id="cmp-mov-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
+                    <input type="number" step="any" inputmode="decimal" id="cmp-mov-monto" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -495,7 +495,7 @@
 
         // ---------- UTILIDADES UI / DROPDOWNS ----------
         const cmpEl = (id) => document.getElementById(id);
-        const cmpMoney = (n) => `$${(Number(n) || 0).toLocaleString()}`;
+        const cmpMoney = (n) => `$${(Number(n) || 0).toLocaleString('en-US')}`;
         const cmpEsc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
         const cmpBalance = (p) => (p.montoPrestado || 0) - (p.montoPagado || 0);
         const cmpEsCobro = (m) => (m.categoria || '').includes('Cobro');
@@ -962,7 +962,7 @@
             const inp = 'w-full bg-transparent text-sm text-white font-medium border-none outline-none select-text';
             body.innerHTML = `
                 <div id="bk-top"></div>
-                ${fld('Amount', `<input type="number" id="bk-monto" onwheel="this.blur()" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();cmpBkSumar();}" class="${inp}">`)}
+                ${fld('Amount', `<input type="number" step="any" inputmode="decimal" id="bk-monto" onwheel="this.blur()" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();cmpBkSumar();}" class="${inp}">`)}
                 <div class="grid grid-cols-2 gap-2">
                     <button type="button" onclick="cmpBkSumar()" class="py-2.5 text-xs font-semibold rounded-full bg-koda-blue text-[#2a1635] hover:bg-[#c384e4] transition-colors cursor-pointer outline-none">Add to backup</button>
                     <button type="button" onclick="cmpBkUsar()" class="py-2.5 text-xs font-semibold rounded-full border border-white/10 text-white hover:bg-white/5 transition-colors cursor-pointer outline-none">Use from backup</button>
@@ -980,7 +980,7 @@
                     </div>
                     <button type="button" onclick="cmpBkMover()" class="self-center h-10 px-5 text-xs font-semibold rounded-full border border-white/10 text-white hover:bg-white/5 transition-colors cursor-pointer outline-none">Move</button>
                 </div>` : ''}
-                ${fld('Months to cover', `<input type="number" id="bk-meses" onwheel="this.blur()" autocomplete="off" oninput="cmpBkMeses(this.value)" value="${k.meses || ''}" class="${inp}">`)}
+                ${fld('Months to cover', `<input type="number" step="any" inputmode="decimal" id="bk-meses" onwheel="this.blur()" autocomplete="off" oninput="cmpBkMeses(this.value)" value="${k.meses || ''}" class="${inp}">`)}
                 ${fld('Notes', `<textarea id="bk-notas" rows="2" maxlength="500" oninput="cmpBk.notas=this.value" class="${inp} resize-none">${cmpEsc(k.notas)}</textarea>`)}
                 ${k.log.length ? `<div><p class="text-[11.5px] font-semibold text-koda-steel mb-1">History</p><div class="max-h-40 overflow-y-auto">${k.log.map(l => {
                     const t = formatearFechaHoraUI(l.fechaStr);

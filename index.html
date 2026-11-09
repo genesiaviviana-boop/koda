@@ -221,7 +221,7 @@
             cuentasDB.forEach(c => {
                 sumaTotal += c.saldo; 
                 let color = c.saldo < 0 ? 'text-koda-red' : ''; 
-                let displayMonto = c.tipo === 'Tarjeta Crédito' ? `$${(c.limite + c.saldo).toLocaleString()}` : (c.saldo < 0 ? `-$${Math.abs(c.saldo).toLocaleString()}` : `$${c.saldo.toLocaleString()}`);
+                let displayMonto = c.tipo === 'Tarjeta Crédito' ? `$${(c.limite + c.saldo).toLocaleString('en-US')}` : (c.saldo < 0 ? `-$${Math.abs(c.saldo).toLocaleString('en-US')}` : `$${c.saldo.toLocaleString('en-US')}`);
                 
                 let iconoHtml = c.logo 
                     ? `<img src="${c.logo}" class="w-full h-full object-cover">` 
@@ -239,9 +239,9 @@
             <p class="text-sm font-semibold ${color}">${displayMonto}</p>
         </div>`;
             });
-            textTotal.innerText = sumaTotal < 0 ? `-$${Math.abs(sumaTotal).toLocaleString()}` : `$${sumaTotal.toLocaleString()}`;
+            textTotal.innerText = sumaTotal < 0 ? `-$${Math.abs(sumaTotal).toLocaleString('en-US')}` : `$${sumaTotal.toLocaleString('en-US')}`;
             // Available balance = liquidez (lo que se puede gastar), distinto del total de todas las cuentas
-            const L = kodaLiquidez(), fm = n => (n < 0 ? '-$' : '$') + Math.abs(Math.round(n * 100) / 100).toLocaleString();
+            const L = kodaLiquidez(), fm = n => (n < 0 ? '-$' : '$') + Math.abs(Math.round(n * 100) / 100).toLocaleString('en-US');
             const det = document.getElementById('disponible-detalle');
             const desg = document.getElementById('disponible-desglose-body');
             if (L.hayMarcadas) {
@@ -309,8 +309,8 @@
                 <div onclick="navegarA('sobres.html?sobre=${s.id}')" class="cursor-pointer bg-koda-darkCard border ${claseBorde}${s.monto === 0 ? ' opacity-50 hover:opacity-100' : ''} transition-colors duration-300 rounded-[1.5rem] p-5 flex flex-col justify-between h-full shadow-sm">
                     <div class="mb-3"><p class="text-[15px] font-semibold truncate text-gray-300">${s.nombre}</p></div>
                     <div>
-                        <h4 class="text-2xl font-semibold mb-1 ${colorTextoMonto}">$${s.monto.toLocaleString()}</h4>
-                        <p class="text-[11.5px] font-semibold text-koda-textMuted mb-4">of $${s.meta.toLocaleString()}</p>
+                        <h4 class="text-2xl font-semibold mb-1 ${colorTextoMonto}">$${s.monto.toLocaleString('en-US')}</h4>
+                        <p class="text-[11.5px] font-semibold text-koda-textMuted mb-4">of $${s.meta.toLocaleString('en-US')}</p>
                         <div class="w-full h-1.5 bg-koda-darkBg rounded-full overflow-hidden">
                             <div class="h-full ${colorBarra} rounded-full transition-all duration-500" style="width: ${porc}%"></div>
                         </div>
@@ -344,7 +344,7 @@
                     <p class="text-[11.5px] text-koda-textMuted truncate mt-0.5">${formatearFechaUI(m.fechaStr)} · ${m.categoria}</p>
                 </div>
             </div>
-            <p class="text-sm font-semibold flex-shrink-0 ${colorTexto}">${esIn ? '+' : '-'}$${Math.abs(m.monto).toLocaleString()}</p>
+            <p class="text-sm font-semibold flex-shrink-0 ${colorTexto}">${esIn ? '+' : '-'}$${Math.abs(m.monto).toLocaleString('en-US')}</p>
         </div>`;
             });
         }
@@ -363,7 +363,7 @@
             let porc = Math.round((proxima.montoActual / proxima.metaTotal) * 100);
 
             document.getElementById('home-meta-nombre').innerText = proxima.nombre;
-            document.getElementById('home-meta-montos').innerText = `$${proxima.montoActual.toLocaleString()} / $${proxima.metaTotal.toLocaleString()}`;
+            document.getElementById('home-meta-montos').innerText = `$${proxima.montoActual.toLocaleString('en-US')} / $${proxima.metaTotal.toLocaleString('en-US')}`;
             document.getElementById('home-meta-barra').style.width = `${porc}%`;
             document.getElementById('widget-proxima-meta').onclick = function() { window.location.href = `metas.html?metaId=${proxima.id}`; };
         }
@@ -535,12 +535,12 @@
 
                 <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl p-4 flex flex-col items-center justify-center gap-1 transition-colors">
                     <span class="text-[11.5px] font-semibold text-koda-steel" id="cuenta-saldo-label">Balance</span>
-                    <input type="number" id="nueva-cuenta-saldo" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
+                    <input type="number" step="any" inputmode="decimal" id="nueva-cuenta-saldo" onwheel="this.blur()" class="w-full bg-transparent text-4xl font-semibold text-white text-center placeholder:text-white/20 border-none outline-none">
                 </div>
 
                 <div id="cuenta-deuda-caja" class="hidden bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl p-4 flex flex-col items-center justify-center gap-1 transition-colors">
                     <span class="text-[11.5px] font-semibold text-koda-steel">Available now</span>
-                    <input type="number" id="nueva-cuenta-disponible" min="0" onwheel="this.blur()" class="w-full bg-transparent text-2xl font-semibold text-white text-center border-none outline-none">
+                    <input type="number" step="any" inputmode="decimal" id="nueva-cuenta-disponible" min="0" onwheel="this.blur()" class="w-full bg-transparent text-2xl font-semibold text-white text-center border-none outline-none">
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-2 border-t border-white/5">

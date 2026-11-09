@@ -252,7 +252,7 @@
         }
         function hxEsCobro(m) { return m.tipo === 'Préstamo' && (m.categoria || '').includes('Cobro'); }
         function hxMonto(m) {
-            const n = `$${Math.abs(m.monto).toLocaleString()}`;
+            const n = `$${Math.abs(m.monto).toLocaleString('en-US')}`;
             if (m.tipo === 'Ingreso' || hxEsCobro(m)) return { txt: `+${n}`, cls: 'text-koda-blue' };
             if (m.tipo === 'Transferencia' || m.tipo === 'Fondeo de Sobre') return { txt: n, cls: 'text-white' };
             return { txt: `-${n}`, cls: 'text-white' };

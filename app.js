@@ -534,7 +534,7 @@ function renderizarWidgetCompromisos() {
                     <p class="text-[15px] font-semibold text-gray-900 dark:text-white">Fixed bills</p>
                 </div>
             </div>
-            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">$${totalFijos.toLocaleString()}</h3>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">$${totalFijos.toLocaleString('en-US')}</h3>
             <div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mb-3 overflow-hidden">
                 <div class="h-full bg-koda-blue rounded-full transition-all duration-500" style="width: ${anchoBarraFijos}%"></div>
             </div>
@@ -556,11 +556,11 @@ function renderizarWidgetCompromisos() {
                 </div>
                 <span class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400 flex-shrink-0">${d.porcPagado}%</span>
             </div>
-            <h3 class="text-2xl font-semibold text-koda-red mb-2">$${(d.deudaActual || 0).toLocaleString()}</h3>
+            <h3 class="text-2xl font-semibold text-koda-red mb-2">$${(d.deudaActual || 0).toLocaleString('en-US')}</h3>
             <div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mb-3 overflow-hidden">
                 <div class="h-full bg-koda-red rounded-full transition-all duration-500" style="width: ${d.porcPagado}%"></div>
             </div>
-            <p class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400">$${d.cuota.toLocaleString()} monthly</p>
+            <p class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400">$${d.cuota.toLocaleString('en-US')} monthly</p>
         </div>
         `;
     });
@@ -627,9 +627,9 @@ function renderizarWidgetComparativa(periodo = '6M') {
     let mesActualIngreso = dataIngresos[dataIngresos.length - 1] || 0;
     let mesActualGasto = dataGastos[dataGastos.length - 1] || 0;
     
-    document.getElementById('kpi-ingresos').innerText = `$${mesActualIngreso.toLocaleString()}`;
-    document.getElementById('kpi-gastos').innerText = `$${mesActualGasto.toLocaleString()}`;
-    document.getElementById('kpi-diferencia').innerText = `$${(mesActualIngreso - mesActualGasto).toLocaleString()}`;
+    document.getElementById('kpi-ingresos').innerText = `$${mesActualIngreso.toLocaleString('en-US')}`;
+    document.getElementById('kpi-gastos').innerText = `$${mesActualGasto.toLocaleString('en-US')}`;
+    document.getElementById('kpi-diferencia').innerText = `$${(mesActualIngreso - mesActualGasto).toLocaleString('en-US')}`;
 
     // 4. Configurar y renderizar ApexCharts
     const esModoOscuro = document.documentElement.classList.contains('dark');
@@ -683,7 +683,7 @@ function renderizarWidgetComparativa(periodo = '6M') {
         },
         tooltip: {
             theme: esModoOscuro ? 'dark' : 'light',
-            y: { formatter: (val) => "$" + val.toLocaleString() }
+            y: { formatter: (val) => "$" + val.toLocaleString('en-US') }
         }
     };
 
@@ -747,7 +747,7 @@ function renderizarWidgetDistribucion() {
                     <span class="w-3 h-3 rounded-full" style="background-color: ${color}"></span>
                     <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold truncate">${item.nombre}</p>
                 </div>
-                <p class="text-xl font-semibold text-gray-900 dark:text-white leading-none mb-1">$${item.monto.toLocaleString()}</p>
+                <p class="text-xl font-semibold text-gray-900 dark:text-white leading-none mb-1">$${item.monto.toLocaleString('en-US')}</p>
                 <p class="text-sm font-semibold" style="color: ${color}">${porc}%</p>
             </div>
         `;
@@ -798,7 +798,7 @@ function renderizarWidgetDistribucion() {
                             color: colorCentro,
                             offsetY: -10, // <-- RESTA ESTO (ej. de -5 a -10 o -15) para subir el número "$..."
                             formatter: function (val) {
-                                return "$" + parseInt(val).toLocaleString();
+                                return "$" + parseInt(val).toLocaleString('en-US');
                             }
                         },
                         total: {
@@ -810,7 +810,7 @@ function renderizarWidgetDistribucion() {
                             color: colorTexto,
                             formatter: function (w) {
                                 let total = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-                                return "$" + total.toLocaleString();
+                                return "$" + total.toLocaleString('en-US');
                             }
                         }
                     }
@@ -819,7 +819,7 @@ function renderizarWidgetDistribucion() {
         },
         tooltip: {
             theme: esModoOscuro ? 'dark' : 'light',
-            y: { formatter: (val) => "$" + val.toLocaleString() }
+            y: { formatter: (val) => "$" + val.toLocaleString('en-US') }
         }
     };
 
@@ -1004,7 +1004,7 @@ function evaluarAlertaSobre() {
                 txtAlerta.innerHTML = `<strong class="text-koda-blue">Balance unavailable.</strong>`;
             } else if (montoInput > sob.monto) {
                 alerta.classList.remove('hidden');
-                txtAlerta.innerHTML = `<strong class="text-koda-blue">Heads up:</strong> This exceeds the available balance ($${sob.monto.toLocaleString()}). The envelope will go negative.`;
+                txtAlerta.innerHTML = `<strong class="text-koda-blue">Heads up:</strong> This exceeds the available balance ($${sob.monto.toLocaleString('en-US')}). The envelope will go negative.`;
             } else {
                 alerta.classList.add('hidden');
             }
@@ -1159,7 +1159,7 @@ function chequearNotificaciones() {
     if (!_notifCargadas) { _notifCargar(); _notifCargadas = true; }
     notificacionesDB = notificacionesDB.filter(n => !n.derivada);
 
-    const fmt = (n) => `$${Math.abs(n).toLocaleString()}`;
+    const fmt = (n) => `$${Math.abs(n).toLocaleString('en-US')}`;
     const derivadas = [];
 
     sobresDB.forEach(s => {
@@ -1553,7 +1553,7 @@ async function confirmarMovimiento() {
             // Al editar, el saldo ya incluye este pago: se compara contra lo que había antes
             const previo = idEdicionActual !== null ? (historialDB.find(m => m.id === idEdicionActual && m.deudaId === id)?.monto || 0) : 0;
             const restante = (it.deudaActual || 0) + previo;
-            if (monto > restante) return mostrarAlertaKoda("Payment too high", `${it.nombre} only has $${restante.toLocaleString()} remaining.`);
+            if (monto > restante) return mostrarAlertaKoda("Payment too high", `${it.nombre} only has $${restante.toLocaleString('en-US')} remaining.`);
             mov = { ...base, tipo: 'Pago de Deuda', desc: descRaw || it.nombre, categoria: it.nombre, sobre: null, deudaId: it.id };
         } else {
             const it = sobresDB.find(s => s.id === id);
@@ -1629,7 +1629,7 @@ async function registrarMovimientoAutomatico({ desc, monto, cuentaId, cuentaDest
     historialDB.push(mov);
     if (notificar) {
         const titulo = tipo === 'Ingreso' ? 'Automatic income registered' : tipo === 'Transferencia' ? 'Automatic transfer registered' : 'Automatic expense registered';
-        kodaNotificar(titulo, `${desc} · $${monto.toLocaleString()} · ${cuenta.apodo}`, { tipo: 'auto', link: 'historial.html' });
+        kodaNotificar(titulo, `${desc} · $${monto.toLocaleString('en-US')} · ${cuenta.apodo}`, { tipo: 'auto', link: 'historial.html' });
     }
     kodaRefrescarVistas();
     return mov;
@@ -2042,3 +2042,17 @@ async function enviarAsistente(ev, textoDirecto) {
 // ---------- Orden elegido en cada lista: KODA lo recuerda en este dispositivo ----------
 function kodaOrdenLeer(clave) { try { return JSON.parse(localStorage.getItem('koda_orden_' + clave) || 'null'); } catch (e) { return null; } }
 function kodaOrdenGuardar(clave, valor) { try { localStorage.setItem('koda_orden_' + clave, JSON.stringify(valor)); } catch (e) {} }
+
+
+// ---------- Redondeo a centavos (evita 2840.7000000000003 al sumar y restar decimales) ----------
+function kodaRedondear() {
+    const r = (n) => Math.round((Number(n) || 0) * 100) / 100;
+    (cuentasDB || []).forEach(c => { if (typeof c.saldo === 'number') c.saldo = r(c.saldo); if (typeof c.limite === 'number') c.limite = r(c.limite); });
+    (sobresDB || []).forEach(s => { if (typeof s.monto === 'number') s.monto = r(s.monto); });
+    (metasDB || []).forEach(m => { if (typeof m.montoActual === 'number') m.montoActual = r(m.montoActual); });
+    (compromisosDB || []).forEach(d => { if (typeof d.deudaActual === 'number') d.deudaActual = r(d.deudaActual); });
+}
+const _kodaAplicarOrig = aplicarMovimientoContable;
+aplicarMovimientoContable = function (mov) { const x = _kodaAplicarOrig(mov); kodaRedondear(); return x; };
+const _kodaRevertirOrig = revertirMovimientoContable;
+revertirMovimientoContable = function (id) { const x = _kodaRevertirOrig(id); kodaRedondear(); return x; };

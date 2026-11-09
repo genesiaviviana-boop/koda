@@ -192,11 +192,11 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Goal amount</span>
-                        <input type="number" id="new-goal-total" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none input-calc" required>
+                        <input type="number" step="any" inputmode="decimal" id="new-goal-total" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none input-calc" required>
                     </div>
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Saved so far</span>
-                        <input type="number" id="new-goal-saved" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none input-calc">
+                        <input type="number" step="any" inputmode="decimal" id="new-goal-saved" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none input-calc">
                     </div>
                 </div>
 
@@ -229,11 +229,11 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 1 savings</span>
-                        <input type="number" id="new-goal-q1" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none" required>
+                        <input type="number" step="any" inputmode="decimal" id="new-goal-q1" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none" required>
                     </div>
                     <div class="bg-[#1f0f28] border border-white/5 focus-within:border-koda-blue/40 rounded-2xl px-4 py-3 flex flex-col gap-1 transition-colors">
                         <span class="text-[11.5px] font-semibold text-koda-steel">Paycheck 2 savings</span>
-                        <input type="number" id="new-goal-q2" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none" required>
+                        <input type="number" step="any" inputmode="decimal" id="new-goal-q2" class="w-full bg-transparent text-sm text-white font-medium border-none outline-none" required>
                     </div>
                 </div>
 
@@ -606,19 +606,19 @@
             }
 
             document.getElementById('det-nombre').innerText = meta.nombre;
-            document.getElementById('det-actual').innerText = `$${meta.montoActual.toLocaleString()}`;
-            document.getElementById('det-meta').innerText = `of $${meta.metaTotal.toLocaleString()}`;
+            document.getElementById('det-actual').innerText = `$${meta.montoActual.toLocaleString('en-US')}`;
+            document.getElementById('det-meta').innerText = `of $${meta.metaTotal.toLocaleString('en-US')}`;
             let porc = Math.round((meta.montoActual / meta.metaTotal) * 100);
             document.getElementById('det-porc').innerText = `${porc}%`;
 
             let faltante = meta.metaTotal - meta.montoActual;
-            document.getElementById('insight-faltante').innerText = faltante > 0 ? `$${faltante.toLocaleString()}` : '0';
+            document.getElementById('insight-faltante').innerText = faltante > 0 ? `$${faltante.toLocaleString('en-US')}` : '0';
             
             let fLim = new Date(meta.fechaLimite);
             let fInic = new Date(meta.fechaInicio);
             let qRest = ((fLim.getFullYear() - new Date().getFullYear()) * 12 + (fLim.getMonth() - new Date().getMonth())) * 2;
             document.getElementById('insight-quincenas').innerText = qRest > 0 ? qRest : '-';
-            document.getElementById('insight-sugerido').innerText = qRest > 0 && faltante > 0 ? `$${Math.ceil(faltante / qRest).toLocaleString()}` : '-';
+            document.getElementById('insight-sugerido').innerText = qRest > 0 && faltante > 0 ? `$${Math.ceil(faltante / qRest).toLocaleString('en-US')}` : '-';
             
             let diffTotal = (fLim.getFullYear() - fInic.getFullYear()) * 12 + (fLim.getMonth() - fInic.getMonth());
             document.getElementById('insight-tiempo').innerText = diffTotal <= 0 ? "Less than 1 month" : `${diffTotal} months`;
@@ -648,7 +648,7 @@
                 else { badge.className = 'text-[11.5px] font-semibold px-3 py-1.5 rounded-full bg-white/10 text-white'; badge.innerText = 'At risk'; }
             } else { badge.className = 'text-[11.5px] font-semibold px-3 py-1.5 rounded-full bg-white/5 text-koda-steel'; badge.innerText = 'No data'; badge.onclick = null; }
 
-            document.getElementById('det-ideal-txt').innerText = `Ideal: $${meta.cuotaIdeal.toLocaleString()}`;
+            document.getElementById('det-ideal-txt').innerText = `Ideal: $${meta.cuotaIdeal.toLocaleString('en-US')}`;
 
             let autoFilter = 'MAX';
             if (diffTotal <= 6) autoFilter = '6M';
@@ -748,7 +748,7 @@
 
             let quincenasRestantes = diffMeses * 2; if(quincenasRestantes === 0) quincenasRestantes = 1; 
             let cuotaSugerida = Math.ceil(faltante / quincenasRestantes);
-            helperUI.innerHTML = `Suggested: <span class="text-koda-blue font-semibold">$${cuotaSugerida.toLocaleString()}</span> per paycheck`;
+            helperUI.innerHTML = `Suggested: <span class="text-koda-blue font-semibold">$${cuotaSugerida.toLocaleString('en-US')}</span> per paycheck`;
         }
 
         async function saveNewGoal() {
@@ -837,7 +837,7 @@
                 grid.innerHTML += `
                 <div class="bg-[#1f0f28] border border-white/5 hover:border-koda-gold/30 rounded-2xl p-5 transition-colors">
                     <p class="font-semibold text-base text-white mb-2 truncate">${m.nombre}</p>
-                    <h4 class="text-xl font-semibold text-koda-gold mb-4">$${m.metaTotal.toLocaleString()}</h4>
+                    <h4 class="text-xl font-semibold text-koda-gold mb-4">$${m.metaTotal.toLocaleString('en-US')}</h4>
                     <div class="flex justify-between items-center pt-3 border-t border-white/5">
                         <span class="text-[11.5px] font-semibold text-koda-steel">${calcTimeSpent(m.fechaInicio, m.fechaFinReal)}</span>
                         <span class="text-[11.5px] font-semibold text-koda-steel">${new Date(m.fechaFinReal).getFullYear()}</span>
@@ -885,7 +885,7 @@
                     responsive: true, maintainAspectRatio: false, cutout: '80%', borderRadius: 4,
                     plugins: { 
                         legend: {display: false},
-                        tooltip: { callbacks: { label: function(context) { let val = context.raw; let p = total > 0 ? Math.round((val/total)*100) : 0; return ` ${context.label}: $${val.toLocaleString()} (${p}%)`; } } }
+                        tooltip: { callbacks: { label: function(context) { let val = context.raw; let p = total > 0 ? Math.round((val/total)*100) : 0; return ` ${context.label}: $${val.toLocaleString('en-US')} (${p}%)`; } } }
                     } 
                 } 
             });
