@@ -33,171 +33,118 @@
 
     <!-- [IDX-02] CONTENIDO PRINCIPAL DEL DASHBOARD -->
     <!-- Margen inferior aumentado a pb-32 para que respire el diseño -->
-    <main class="w-full max-w-[1500px] grid grid-cols-1 lg:grid-cols-12 gap-6 pb-32">
-        
-        <!-- ================= COLUMNA IZQUIERDA (3/12) ================= -->
-        <aside class="lg:col-span-3 flex flex-col gap-6">
-            <!-- Disponible Global -->
-            <div id="card-disponible" onclick="toggleDesgloseDisponible()" class="bg-white dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[2rem] p-8 shadow-sm relative overflow-hidden cursor-pointer select-none">
-                <div class="flex items-start justify-between mb-3">
-                    <p class="text-koda-textMuted text-xs font-semibold">Available balance</p>
-                    <span id="disponible-chev" class="material-symbols-outlined text-[18px] text-koda-steel transition-transform duration-300">expand_more</span>
-                </div>
-                <h2 class="text-5xl font-semibold text-gray-900 dark:text-white" id="disponible-text">$0</h2>
-                <p class="text-[11.5px] font-semibold text-koda-textMuted mt-3 leading-relaxed" id="disponible-detalle"></p>
-                <div id="disponible-desglose" class="desglose-wrap"><div><div id="disponible-desglose-body" class="mt-5 pt-4 border-t border-white/5 flex flex-col"></div></div></div>
-            </div>
-            
-            <!-- Cuentas -->
-            <div class="bg-koda-lightCard dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[2rem] p-6">
-                <div class="flex justify-between items-center mb-5">
-                    <div>
-                        <p class="text-koda-textMuted text-xs font-semibold mb-1">My accounts</p>
-                        <span id="total-cuentas-text" class="text-xl font-semibold text-gray-900 dark:text-white">$0</span>
-                    </div>
-                    <button onclick="abrirModalCrearCuenta()" class="w-8 h-8 bg-gray-100 dark:bg-koda-darkBg hover:bg-koda-blue hover:text-white rounded-full flex items-center justify-center text-gray-500 transition-colors shadow-sm cursor-pointer">
-                        <span class="material-symbols-outlined text-[18px]">add</span>
-                    </button>
-                </div>
-                <div id="lista-cuentas" class="space-y-2 mb-4"></div>
-            </div>
+    <main class="k-dash w-full max-w-[1500px] grid grid-cols-1 lg:grid-cols-12 gap-5 pb-32">
 
-            <!-- Compromisos (MOVIDO A LA IZQUIERDA) -->
-            <div class="w-full pt-2">
-                <!-- Cabecera Compromisos -->
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-semibold cursor-pointer select-none" onclick="navegarA('compromisos')">Obligations</h3>
-                    <button onclick="navegarA('compromisos')" class="text-[11.5px] font-semibold text-koda-blue cursor-pointer select-none relative inline-flex items-center gap-1 overflow-visible after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:origin-bottom-left hover:after:scale-x-100">
-                        Manage <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                    </button>
-                </div>
-                <!-- Apilados verticalmente con flex-col -->
-                <div id="widget-compromisos-container" class="flex flex-col gap-4"></div>
+        <!-- [ETAPA 3] Fila 1 · Saldo disponible -->
+        <div id="card-disponible" onclick="toggleDesgloseDisponible()" class="k-dcard k-dash-hero order-1 lg:order-none lg:col-span-5 cursor-pointer select-none">
+            <div class="flex items-start justify-between mb-3">
+                <p class="k-dlabel">Available balance</p>
+                <span id="disponible-chev" class="k-dchev"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg></span>
             </div>
-        </aside>
+            <h2 class="k-dbig" id="disponible-text">$0</h2>
+            <p class="k-dsub mt-3" id="disponible-detalle"></p>
+            <div id="disponible-desglose" class="desglose-wrap"><div><div id="disponible-desglose-body" class="mt-5 pt-4 border-t border-white/10 flex flex-col"></div></div></div>
+        </div>
 
-        <!-- ================= CONTENEDOR CENTRAL Y DERECHO (9/12) ================= -->
-        <div class="lg:col-span-9 grid grid-cols-1 lg:grid-cols-9 gap-6 h-full">
-            
-            <!-- ====== COLUMNA CENTRAL (6/9) ====== -->
-            <section class="lg:col-span-6 flex flex-col gap-6 w-full overflow-hidden h-full">
-                
-                <!-- WIDGET COMPARATIVA -->
-                <div class="bg-white dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[2rem] p-6 w-full shadow-sm">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 gap-4">
-                        <div>
-                            <p class="text-koda-textMuted text-[11.5px] font-semibold mb-1">Comparison</p>
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Income vs expenses</h3>
-                        </div>
-                        <div class="flex gap-1 bg-[#341b40] p-1 rounded-lg" id="filtros-periodo">
+        <!-- Próxima meta -->
+        <div id="widget-proxima-meta" onclick="" class="k-dcard k-dash-meta order-5 lg:order-none lg:col-span-3 lg:self-start cursor-pointer group">
+            <div class="flex justify-between items-start">
+                <p class="k-dlabel k-dlabel--meta">Next goal</p>
+                <div class="k-dgo"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></div>
+            </div>
+            <h3 class="k-dmeta-name truncate flex items-center gap-2" id="home-meta-nombre">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg>
+                No goals yet
+            </h3>
+            <p class="k-dmeta-amt" id="home-meta-montos">$0 / $0</p>
+            <div class="k-dbar k-dbar--meta"><div id="home-meta-barra" class="w-[0%]"></div></div>
+        </div>
+
+        <!-- Check Pay -->
+        <div onclick="navegarA('checkpay')" class="k-dcard k-dcard--link order-6 lg:order-none lg:col-span-4 lg:self-start cursor-pointer group">
+            <div class="k-dhead">
+                <h3 class="k-dtitle"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.801 10A10 10 0 1 1 17 3.335" /> <path d="m9 11 3 3L22 4" /></svg><span>Check Pay</span></h3>
+                <span class="k-dgo k-dgo--soft"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /></svg></span>
+            </div>
+            <h3 class="k-dnum" id="home-cp-conteo">0 / 0 paid</h3>
+            <div class="k-dbar"><div id="home-cp-barra" style="width: 0%"></div></div>
+            <p class="k-dsub mt-3" id="home-cp-sub">0% complete this period</p>
+        </div>
+
+        <!-- Fila 2 · Cuentas -->
+        <div class="k-dcard k-dacc order-2 lg:order-none lg:col-span-4">
+            <div class="k-dhead">
+                <div class="min-w-0">
+                    <h3 class="k-dtitle mb-2"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 18v-7" /> <path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /> <path d="M14 18v-7" /> <path d="M18 18v-7" /> <path d="M3 22h18" /> <path d="M6 18v-7" /></svg><span>My accounts</span></h3>
+                    <span id="total-cuentas-text" class="k-dnum2">$0</span>
+                </div>
+                <button onclick="abrirModalCrearCuenta()" class="k-dadd" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14" /> <path d="M12 5v14" /></svg></button>
+            </div>
+            <div id="lista-cuentas" class="k-dlist"></div>
+        </div>
+
+        <!-- Comparativa -->
+        <div class="k-dcard order-7 lg:order-none lg:col-span-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-5 gap-4">
+                <div>
+                    <p class="k-dlabel mb-1">Comparison</p>
+                    <h3 class="k-dtitle k-dtitle--lg">Income vs expenses</h3>
+                </div>
+                <div class="flex gap-1 bg-[#341b40] p-1 rounded-lg" id="filtros-periodo">
                             <button data-periodo="1M" onclick="renderizarWidgetComparativa('1M')" class="btn-periodo px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer outline-none text-koda-steel hover:text-white">1M</button>
                             <button data-periodo="3M" onclick="renderizarWidgetComparativa('3M')" class="btn-periodo px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer outline-none text-koda-steel hover:text-white">3M</button>
                             <button data-periodo="6M" onclick="renderizarWidgetComparativa('6M')" class="btn-periodo px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer outline-none bg-white/10 text-white shadow-sm activo">6M</button>
                             <button data-periodo="1A" onclick="renderizarWidgetComparativa('1A')" class="btn-periodo px-3 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer outline-none text-koda-steel hover:text-white">1A</button>
                         </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 md:gap-4 mb-2">
-                        <div class="bg-gray-50 dark:bg-[#341b40] border border-gray-100 dark:border-gray-800 p-4 rounded-2xl flex flex-col justify-center">
-                            <p class="text-[10px] font-semibold text-koda-textMuted mb-1">Income</p>
-                            <p class="text-base md:text-lg font-semibold text-koda-blue truncate" id="kpi-ingresos">$0</p>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-[#341b40] border border-gray-100 dark:border-gray-800 p-4 rounded-2xl flex flex-col justify-center">
-                            <p class="text-[10px] font-semibold text-koda-textMuted mb-1">Expenses</p>
-                            <p class="text-base md:text-lg font-semibold text-koda-red truncate" id="kpi-gastos">$0</p>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-[#341b40] border border-gray-100 dark:border-gray-800 p-4 rounded-2xl flex flex-col justify-center">
-                            <p class="text-[10px] font-semibold text-koda-textMuted mb-1">Net</p>
-                            <p class="text-base md:text-lg font-semibold text-koda-green truncate" id="kpi-diferencia">$0</p>
-                        </div>
-                    </div>
-                    <div class="w-full relative -mx-2 mt-4">
-                        <div id="chart-comparativa" class="w-full h-[310px]"></div>
-                    </div>
-                </div>
-                
-                <!-- Sobres Activos -->
-                <div class="w-full mt-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-semibold cursor-pointer select-none" onclick="navegarA('sobres')">Active envelopes</h3>
-                        <button onclick="navegarA('sobres')" class="text-[11.5px] font-semibold text-koda-blue cursor-pointer select-none relative inline-flex items-center gap-1 overflow-visible after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:origin-bottom-left hover:after:scale-x-100">
-                            Manage <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4" id="lista-sobres-dashboard"></div>
-                </div>
+            </div>
+            <div class="k-dkpis grid grid-cols-3 gap-3 mb-2">
+                <div class="k-dkpi"><p class="k-dlabel">Income</p><p class="k-dkpi__v text-koda-blue" id="kpi-ingresos">$0</p></div>
+                <div class="k-dkpi"><p class="k-dlabel">Expenses</p><p class="k-dkpi__v text-koda-red" id="kpi-gastos">$0</p></div>
+                <div class="k-dkpi"><p class="k-dlabel">Net</p><p class="k-dkpi__v text-koda-green" id="kpi-diferencia">$0</p></div>
+            </div>
+            <div class="w-full relative -mx-2 mt-4">
+                <div id="chart-comparativa" class="w-full h-[290px]"></div>
+            </div>
+        </div>
 
-                <!-- WIDGET DISTRIBUCIÓN (ESTIRADO AL RAS) -->
-                <div class="w-full pt-2 flex-1 flex flex-col">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-xl font-semibold cursor-pointer select-none inline-flex items-center gap-2" onclick="navegarA('historial')">
-                            Spending breakdown
-                        </h3>
-                        <button onclick="navegarA('historial')" class="text-[11.5px] font-semibold text-koda-blue cursor-pointer select-none relative inline-flex items-center gap-1 overflow-visible after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:origin-bottom-left hover:after:scale-x-100">
-                            View details <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                        </button>
-                    </div>
-                    <div class="bg-white dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[1.5rem] p-8 shadow-sm flex flex-col md:flex-row items-center justify-center gap-12 flex-1">
-                        <div class="w-full md:w-[50%] flex justify-center relative">
-                            <div id="chart-distribucion" class="w-full flex justify-center"></div>
-                        </div>
-                        <div id="leyenda-distribucion" class="w-full md:w-[50%] grid grid-cols-2 gap-y-8 gap-x-6"></div>
-                    </div>
-                </div>
+        <!-- Fila 3 · Obligaciones -->
+        <div class="k-dcard order-3 lg:order-none lg:col-span-4">
+            <div class="k-dhead">
+                <h3 class="k-dtitle cursor-pointer select-none" onclick="navegarA('compromisos')"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 16H8" /> <path d="M14 8H8" /> <path d="M16 12H8" /> <path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z" /></svg><span>Obligations</span></h3>
+                <button onclick="navegarA('compromisos')" class="k-dlink" type="button">Manage <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6" /></svg></button>
+            </div>
+            <div id="widget-compromisos-container" class="flex flex-col gap-3"></div>
+        </div>
 
-            </section>
+        <!-- Sobres activos -->
+        <div class="k-dcard order-4 lg:order-none lg:col-span-8">
+            <div class="k-dhead">
+                <h3 class="k-dtitle cursor-pointer select-none" onclick="navegarA('sobres')"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 11h3.75a2 2 0 0 1 1.6.8l.45.6a4 4 0 0 0 6.4 0l.45-.6a2 2 0 0 1 1.6-.8H21" /> <path d="M3 7h18" /> <rect x="3" y="3" width="18" height="18" rx="2" /></svg><span>Active envelopes</span></h3>
+                <button onclick="navegarA('sobres')" class="k-dlink" type="button">Manage <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6" /></svg></button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="lista-sobres-dashboard"></div>
+        </div>
 
-            <!-- ====== COLUMNA DERECHA (3/9) ====== -->
-            <aside class="lg:col-span-3 flex flex-col gap-6 w-full h-full">
-                
-                <!-- Próxima Meta -->
-                <div id="widget-proxima-meta" onclick="" class="bg-[#b168d9] text-[#2a1635] rounded-[2rem] p-6 relative overflow-hidden cursor-pointer border border-transparent hover:border-[#2a1635]/30 transition-colors duration-300 transition-all shadow-sm group w-full block">
-                    <div class="flex justify-between items-start">
-                        <p class="text-[11.5px] font-semibold text-[#2a1635]/70">Next goal</p>
-                        <div class="w-8 h-8 bg-[#2a1635]/10 rounded-full flex items-center justify-center group-hover:bg-[#2a1635] group-hover:text-[#b168d9] transition-colors">
-                            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                        </div>
-                    </div>
-                    <h3 class="text-3xl font-semibold mt-[-4px] mb-1 truncate flex items-center gap-2" id="home-meta-nombre">
-                        <span class="material-symbols-outlined text-[26px]">flag</span>
-                        No goals yet
-                    </h3>
-                    <p class="text-[11.5px] font-semibold mb-3 opacity-90" id="home-meta-montos">$0 / $0</p>
-                    <div class="w-full h-1.5 bg-[#2a1635]/20 rounded-full overflow-hidden">
-                        <div id="home-meta-barra" class="w-[0%] h-full bg-[#2a1635] rounded-full transition-all duration-500"></div>
-                    </div>
+        <!-- Fila 4 · Distribución y Historial -->
+        <div class="k-dcard order-8 lg:order-none lg:col-span-5 flex flex-col">
+            <div class="k-dhead">
+                <h3 class="k-dtitle cursor-pointer select-none" onclick="navegarA('historial')"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" /> <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /></svg><span>Spending breakdown</span></h3>
+                <button onclick="navegarA('historial')" class="k-dlink" type="button">View details <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6" /></svg></button>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center gap-6 flex-1 justify-center">
+                <div class="w-full lg:w-[52%] flex justify-center relative">
+                    <div id="chart-distribucion" class="w-full flex justify-center"></div>
                 </div>
-                
-                <!-- WIDGET CHECK PAY -->
-                <div onclick="navegarA('checkpay')" class="bg-koda-darkCard border border-koda-darkBorder rounded-[2rem] p-6 shadow-sm flex flex-col justify-between cursor-pointer hover:border-[#b168d9]/50 transition-all group relative overflow-hidden w-full">
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[#b168d9] text-[18px]">fact_check</span>
-                            <span class="text-[15px] font-semibold text-gray-900 dark:text-white">Check Pay</span>
-                        </div>
-                        <span class="material-symbols-outlined text-gray-400 group-hover:text-[#b168d9] group-hover:translate-x-1 transition-all text-[18px]">arrow_forward</span>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-semibold text-white mb-2" id="home-cp-conteo">0 / 0 paid</h3>
-                        <div class="w-full h-1.5 bg-koda-darkBg rounded-full overflow-hidden mb-3">
-                            <div id="home-cp-barra" class="h-full bg-[#b168d9] rounded-full transition-all duration-700" style="width: 0%"></div>
-                        </div>
-                        <p class="text-[11.5px] font-semibold text-koda-textMuted" id="home-cp-sub">0% complete this period</p>
-                    </div>
-                </div>
+                <div id="leyenda-distribucion" class="k-dleyenda w-full lg:w-[48%]"></div>
+            </div>
+        </div>
 
-                <!-- Historial (ESTIRADO AL RAS) -->
-                <div class="bg-koda-lightCard dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[2rem] p-5 w-full flex-1 flex flex-col">
-                    <div class="flex justify-between items-center mb-5">
-                        <h3 class="font-semibold text-lg cursor-pointer select-none inline-flex items-center gap-2" onclick="navegarA('historial')">
-                            History
-                        </h3>
-                        <button onclick="navegarA('historial')" class="text-[11.5px] font-semibold text-koda-blue cursor-pointer select-none relative inline-flex items-center gap-1 overflow-visible after:absolute after:-bottom-1 after:left-0 after:h-[1.5px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-out hover:after:origin-bottom-left hover:after:scale-x-100">
-                            View all <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                        </button>
-                    </div>
-                    <div class="space-y-2 flex-1" id="historial-lista-dashboard"></div>
-                </div>
-            </aside>
+        <div class="k-dcard order-9 lg:order-none lg:col-span-7 flex flex-col">
+            <div class="k-dhead">
+                <h3 class="k-dtitle cursor-pointer select-none" onclick="navegarA('historial')"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /> <path d="M3 3v5h5" /> <path d="M12 7v5l4 2" /></svg><span>History</span></h3>
+                <button onclick="navegarA('historial')" class="k-dlink" type="button">View all <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6" /></svg></button>
+            </div>
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-3 content-start flex-1" id="historial-lista-dashboard"></div>
         </div>
     </main>
 
@@ -219,7 +166,7 @@
             const textTotal = document.getElementById('total-cuentas-text');
             const textDisp = document.getElementById('disponible-text');
             contDash.innerHTML = ''; let sumaTotal = 0;
-            if (!cuentasDB.length) contDash.innerHTML = `<div class="flex flex-col items-center justify-center py-8 gap-1 text-koda-steel"><span class="material-symbols-outlined text-[28px] opacity-60">account_balance</span><p class="text-[12.5px] font-medium">No accounts yet. Use the + button to add one.</p></div>`;
+            if (!cuentasDB.length) contDash.innerHTML = `<div class="flex flex-col items-center justify-center py-8 gap-1 text-koda-steel">${kodaIcon('landmark',{size:28})}<p class="text-[12.5px] font-medium">No accounts yet. Use the + button to add one.</p></div>`;
             cuentasDB.forEach(c => {
                 sumaTotal += c.saldo; 
                 let color = c.saldo < 0 ? 'text-koda-red' : ''; 
@@ -230,15 +177,15 @@
                     : `<span class="text-[14px] font-semibold">${c.sigla}</span>`;
 
                 contDash.innerHTML += `
-        <div onclick="if(typeof abrirModalEditarCuenta === 'function') abrirModalEditarCuenta(${c.id})" class="flex justify-between items-center p-3 mb-1 rounded-xl cursor-pointer hover:bg-koda-darkBorder/50 transition-colors duration-200 group">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden ${CUENTA_COLOR}">${iconoHtml}</div>
-                <div>
-                    <p class="text-[15px] font-semibold text-gray-900 dark:text-white leading-tight mb-0.5">${c.apodo}</p>
-                    <p class="text-[11.5px] text-koda-textMuted leading-tight">${c.banco} · DOP${c.liquida === true ? ' · Spending' : ''}</p>
+        <div onclick="if(typeof abrirModalEditarCuenta === 'function') abrirModalEditarCuenta(${c.id})" class="k-drow group">
+            <div class="k-drow__l">
+                <div class="k-dav ${CUENTA_COLOR}">${iconoHtml}</div>
+                <div class="min-w-0">
+                    <p class="k-drow__t">${c.apodo}</p>
+                    <p class="k-drow__s">${c.banco} · DOP${c.liquida === true ? ' · Spending' : ''}</p>
                 </div>
             </div>
-            <p class="text-sm font-semibold ${color}">${displayMonto}</p>
+            <p class="k-drow__v ${color}">${displayMonto}</p>
         </div>`;
             });
             textTotal.innerText = sumaTotal < 0 ? `-$${Math.abs(sumaTotal).toLocaleString('en-US')}` : `$${sumaTotal.toLocaleString('en-US')}`;
@@ -287,7 +234,7 @@
             if (sobresMostrar.length === 0) {
                 cont.innerHTML = `
                 <div style="grid-column:1/-1" class="col-span-full flex flex-col items-center justify-center p-6 bg-koda-darkBg rounded-[1.5rem] border border-dashed border-koda-darkBorder">
-                    <span class="material-symbols-outlined text-koda-textMuted mb-2 text-3xl">inbox</span>
+                    <span class="text-koda-textMuted mb-2">${kodaIcon('inbox',{size:30})}</span>
                     <p class="text-sm font-semibold text-koda-textMuted">No active envelopes.</p>
                 </div>`;
                 return;
@@ -308,13 +255,13 @@
                 }
                 
                 cont.innerHTML += `
-                <div onclick="navegarA('sobres.html?sobre=${s.id}')" class="cursor-pointer bg-koda-darkCard border ${claseBorde}${s.monto === 0 ? ' opacity-50 hover:opacity-100' : ''} transition-colors duration-300 rounded-[1.5rem] p-5 flex flex-col justify-between h-full shadow-sm">
-                    <div class="mb-3"><p class="text-[15px] font-semibold truncate text-gray-300">${s.nombre}</p></div>
+                <div onclick="navegarA('sobres.html?sobre=${s.id}')" class="k-dtile k-dtile--link border ${claseBorde}${s.monto === 0 ? ' opacity-50 hover:opacity-100' : ''} cursor-pointer flex flex-col justify-between h-full">
+                    <div class="mb-3 flex items-center justify-between gap-2"><p class="k-drow__t truncate">${s.nombre}</p>${s.monto >= 0 ? `<span class="k-dchip">${porc}%</span>` : ''}</div>
                     <div>
-                        <h4 class="text-2xl font-semibold mb-1 ${colorTextoMonto}">$${s.monto.toLocaleString('en-US')}</h4>
-                        <p class="text-[11.5px] font-semibold text-koda-textMuted mb-4">of $${s.meta.toLocaleString('en-US')}</p>
-                        <div class="w-full h-1.5 bg-koda-darkBg rounded-full overflow-hidden">
-                            <div class="h-full ${colorBarra} rounded-full transition-all duration-500" style="width: ${porc}%"></div>
+                        <h4 class="k-dnum2 mb-1 ${colorTextoMonto}">$${s.monto.toLocaleString('en-US')}</h4>
+                        <p class="k-dsub mb-4">of $${s.meta.toLocaleString('en-US')}</p>
+                        <div class="k-dbar">
+                            <div class="${colorBarra}" style="width: ${porc}%"></div>
                         </div>
                     </div>
                 </div>`; 
@@ -325,7 +272,7 @@
             const cont = document.getElementById('historial-lista-dashboard'); 
             cont.innerHTML = '';
             if (!historialDB || historialDB.length === 0) {
-                cont.innerHTML = `<div class="flex flex-col items-center justify-center py-6"><span class="material-symbols-outlined text-koda-textMuted text-3xl mb-2">receipt_long</span><p class="text-xs text-koda-textMuted font-semibold">No recent transactions.</p></div>`;
+                cont.innerHTML = `<div class="flex flex-col items-center justify-center py-6"><span class="text-koda-textMuted mb-2">${kodaIcon('receipt-text',{size:30})}</span><p class="text-xs text-koda-textMuted font-semibold">No recent transactions.</p></div>`;
                 return;
             }
             let ordenados = [...historialDB].sort((a,b) => new Date(b.fechaStr) - new Date(a.fechaStr));
@@ -335,18 +282,18 @@
                 const colorTexto = esIn ? 'text-koda-green' : 'text-gray-900 dark:text-white'; 
                 // Opacidad ultrabaja (5%) para que los fondos sean sutiles
                 const iconBg = esIn ? 'bg-koda-green/5 text-koda-green' : 'bg-white/5 text-gray-400'; 
-                const icono = esIn ? 'south_west' : 'north_east'; 
+                const icono = esIn ? kodaIcon('arrow-down-left',{size:16,stroke:2.2}) : kodaIcon('arrow-up-right',{size:16,stroke:2.2}); 
                 
                 cont.innerHTML += `
-        <div onclick="abrirModalEdicion(${m.id})" class="flex justify-between items-center p-3.5 border border-koda-darkBorder hover:border-koda-blue/50 rounded-2xl transition-colors cursor-pointer mb-2 group bg-koda-darkBg">
+        <div onclick="abrirModalEdicion(${m.id})" class="k-dmv group">
             <div class="flex items-center gap-3 min-w-0 pr-3">
-                <div class="w-8 h-8 flex-shrink-0 ${iconBg} rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-[16px] font-semibold">${icono}</span></div>
+                <div class="w-9 h-9 flex-shrink-0 ${iconBg} rounded-xl flex items-center justify-center">${icono}</div>
                 <div class="min-w-0">
                     <p class="text-[14px] font-semibold text-gray-900 dark:text-white truncate">${m.desc || m.tipo}</p>
                     <p class="text-[11.5px] text-koda-textMuted truncate mt-0.5">${formatearFechaUI(m.fechaStr)} · ${m.categoria}</p>
                 </div>
             </div>
-            <p class="text-sm font-semibold flex-shrink-0 ${colorTexto}">${esIn ? '+' : '-'}$${Math.abs(m.monto).toLocaleString('en-US')}</p>
+            <p class="text-sm font-bold flex-shrink-0 ${colorTexto}">${esIn ? '+' : '-'}$${Math.abs(m.monto).toLocaleString('en-US')}</p>
         </div>`;
             });
         }

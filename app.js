@@ -90,6 +90,10 @@ async function inicializarKODA() {
         else if (ruta.includes('checkpay')) btnActivo = document.getElementById('nav-btn-checkpay');
         else if (ruta.includes('trading')) btnActivo = document.getElementById('nav-btn-trading');
         
+        // Etapa 2: marca accesible de la sección activa y modo de navegación lateral
+        if (btnActivo) { btnActivo.setAttribute('aria-current', 'page'); }
+        if (contNav) document.body.classList.add('k-nav-lateral');
+
         if (btnActivo) {
             setTimeout(() => {
                 const slider = document.getElementById('nav-slider');
@@ -527,20 +531,20 @@ function renderizarWidgetCompromisos() {
 
     let html = `
         <!-- Tarjeta: Pagos Fijos -->
-        <div class="bg-white dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[1.5rem] p-6 relative overflow-hidden shadow-sm flex flex-col justify-center cursor-pointer hover:border-gray-300 dark:hover:border-gray-600 transition-colors" onclick="navegarA('compromisos')">
-            <div class="flex justify-between items-center mb-4">
-                <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-koda-blue text-[18px]">event_repeat</span>
-                    <p class="text-[15px] font-semibold text-gray-900 dark:text-white">Fixed bills</p>
+        <div class="k-dtile k-dtile--link cursor-pointer" onclick="navegarA('compromisos')">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center gap-2 text-koda-blue">
+                    ${kodaIcon('repeat',{size:18})}
+                    <p class="k-drow__t">Fixed bills</p>
                 </div>
             </div>
-            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">$${totalFijos.toLocaleString('en-US')}</h3>
-            <div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mb-3 overflow-hidden">
-                <div class="h-full bg-koda-blue rounded-full transition-all duration-500" style="width: ${anchoBarraFijos}%"></div>
+            <h3 class="k-dnum2 mb-2">$${totalFijos.toLocaleString('en-US')}</h3>
+            <div class="k-dbar mb-3">
+                <div style="width: ${anchoBarraFijos}%"></div>
             </div>
-            <div class="flex justify-between items-center mt-1">
-                <p class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400">of income goes to bills</p>
-                <span class="text-[11.5px] font-semibold text-koda-blue bg-koda-blue/10 px-2 py-0.5 rounded">${porcFijos}%</span>
+            <div class="flex justify-between items-center gap-2 mt-1">
+                <p class="k-dsub">of income goes to bills</p>
+                <span class="k-dchip flex-shrink-0">${porcFijos}%</span>
             </div>
         </div>
     `;
@@ -548,19 +552,19 @@ function renderizarWidgetCompromisos() {
     topDeudas.forEach(d => {
         html += `
         <!-- Tarjeta: Deuda -->
-        <div class="bg-white dark:bg-koda-darkCard border border-gray-100 dark:border-koda-darkBorder rounded-[1.5rem] p-6 relative overflow-hidden shadow-sm flex flex-col justify-center cursor-pointer hover:border-gray-300 dark:hover:border-gray-600 transition-colors" onclick="navegarA('compromisos.html?debt=${d.id}')">
-            <div class="flex justify-between items-center mb-4">
-                <div class="flex items-center gap-2 min-w-0 pr-2">
-                    <span class="material-symbols-outlined text-koda-red text-[18px]">account_balance</span>
-                    <p class="text-[15px] font-semibold text-gray-900 dark:text-white truncate">${d.nombre}</p>
+        <div class="k-dtile k-dtile--link cursor-pointer" onclick="navegarA('compromisos.html?debt=${d.id}')">
+            <div class="flex justify-between items-center mb-3 gap-2">
+                <div class="flex items-center gap-2 min-w-0 text-koda-red">
+                    ${kodaIcon('landmark',{size:18})}
+                    <p class="k-drow__t truncate">${d.nombre}</p>
                 </div>
-                <span class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400 flex-shrink-0">${d.porcPagado}%</span>
+                <span class="k-dsub flex-shrink-0">${d.porcPagado}%</span>
             </div>
-            <h3 class="text-2xl font-semibold text-koda-red mb-2">$${(d.deudaActual || 0).toLocaleString('en-US')}</h3>
-            <div class="w-full h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full mb-3 overflow-hidden">
-                <div class="h-full bg-koda-red rounded-full transition-all duration-500" style="width: ${d.porcPagado}%"></div>
+            <h3 class="k-dnum2 text-koda-red mb-2">$${(d.deudaActual || 0).toLocaleString('en-US')}</h3>
+            <div class="k-dbar k-dbar--rose mb-3">
+                <div style="width: ${d.porcPagado}%"></div>
             </div>
-            <p class="text-[11.5px] font-semibold text-gray-500 dark:text-gray-400">$${d.cuota.toLocaleString('en-US')} monthly</p>
+            <p class="k-dsub">$${d.cuota.toLocaleString('en-US')} monthly</p>
         </div>
         `;
     });
@@ -724,12 +728,12 @@ function renderizarWidgetDistribucion() {
     arrGastos.sort((a,b) => b.monto - a.monto);
 
 // 3. Paleta de colores KODA extendida (Dark Zen)
-    const colores = ['#b168d9', '#787886', '#C1A35F', '#6a4c7d', '#7f3fa3', '#5F6368'];    let seriesData = [];
+    const colores = ['#A78BFA', '#E879F9', '#7C3AED', '#6EE7B7', '#FCD34D', '#FDA4C0'];    let seriesData = [];
     let labelsData = [];
     contLeyenda.innerHTML = '';
 
     if (arrGastos.length === 0) {
-        contLeyenda.innerHTML = `<p class="text-xs text-gray-500 col-span-2">No expenses to show.</p>`;
+        contLeyenda.innerHTML = `<p class="text-xs text-gray-500">No expenses to show.</p>`;
         return;
     }
 
@@ -742,13 +746,11 @@ function renderizarWidgetDistribucion() {
         let porc = Math.round((item.monto / totalGastos) * 100);
 
         contLeyenda.innerHTML += `
-            <div class="flex flex-col">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="w-3 h-3 rounded-full" style="background-color: ${color}"></span>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 font-semibold truncate">${item.nombre}</p>
-                </div>
-                <p class="text-xl font-semibold text-gray-900 dark:text-white leading-none mb-1">$${item.monto.toLocaleString('en-US')}</p>
-                <p class="text-sm font-semibold" style="color: ${color}">${porc}%</p>
+            <div class="k-dleg">
+                <span class="k-dleg__dot" style="background-color: ${color}"></span>
+                <p class="k-dleg__n">${item.nombre}</p>
+                <p class="k-dleg__v">$${item.monto.toLocaleString('en-US')}</p>
+                <p class="k-dleg__p" style="color: ${color}">${porc}%</p>
             </div>
         `;
     });;
