@@ -2,9 +2,10 @@
 <html lang="en" class="dark">
 <head>
     <script src="koda-es.js"></script>
+    <script src="koda-icons.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2a1635">
+    <meta name="theme-color" content="#0E0916">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>KODA</title>
@@ -13,7 +14,7 @@
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         :root { --bg:#2a1635; --card:#3b1f47; --card2:#4f2d5e; --line:rgba(255,255,255,.08); --txt:#f8f3fb; --mut:#b9a3c6; --cy:#b168d9; --gold:#C1A35F;  }
@@ -122,6 +123,63 @@
         .queue.on { display: flex; } .queue b { color: var(--gold); } .queue button { margin-left: auto; color: var(--cy); font-weight: 700; font-size: 13.5px; padding: 4px 2px; }
         .tag { color: var(--gold); font-weight: 700; }
         .pull { text-align: center; color: var(--mut); font-size: 12px; margin-top: 18px; }
+        /* ===== PURPLE PREMIUM · móvil (solo estilos; la lógica no cambia) ===== */
+        :root { --bg:#0E0916; --card:#181126; --card2:#21183A; --line:rgba(255,255,255,.07); --txt:#F6F3FF; --mut:#A9A0C6; --cy:#A78BFA; --gold:#FCD34D; --rose:#FDA4C0; --mint:#6EE7B7; --cta:linear-gradient(135deg,#C026D3,#7C3AED); }
+        html, body { font-family: Inter, 'Maven Pro', system-ui, sans-serif; }
+        body { background: var(--bg) radial-gradient(520px 320px at 92% -4%, rgba(139,92,246,.22), transparent 62%) no-repeat; background-attachment: fixed; }
+        .k-svg { display: inline-flex; align-items: center; justify-content: center; font-family: inherit; } .k-svg svg { display: block; }
+        header { background: rgba(14,9,22,.88); border-bottom: 1px solid transparent; }
+        .logo { font-weight: 900; letter-spacing: -.05em; }
+        .icon-btn { width: 40px; height: 40px; border-radius: 13px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+        header .wrap > div { gap: 8px !important; }
+        .orb-btn { border-radius: 50%; background: rgba(124,58,237,.22); border: 1px solid rgba(167,139,250,.38); }
+        .orb { width: 16px; height: 16px; box-shadow: 0 0 14px rgba(139,92,246,.7); background: radial-gradient(circle at 35% 30%, #E9D5FF 0%, #8B5CF6 55%, #4C1D95 100%); }
+        .orb-ring { display: none; } .orb-btn.on { background: rgba(124,58,237,.45); }
+        .icon-btn.unread::after { background: var(--cy); border: 2px solid var(--bg); top: 7px; right: 8px; }
+        .npanel { background: #21183A; border: 1px solid rgba(167,139,250,.28); border-radius: 22px; }
+        .nitem .ni { background: rgba(167,139,250,.14); } .nitem.new { background: rgba(167,139,250,.08); }
+        .hero { background: radial-gradient(260px 200px at 100% 0%, rgba(167,139,250,.38), transparent 70%), linear-gradient(135deg, #3b1d8f 0%, #1d1236 78%); border: 1px solid rgba(167,139,250,.3); border-radius: 26px; padding: 22px; position: relative; overflow: hidden; }
+        .hero .lbl { color: #CDBFFF; }
+        .big { font-size: 42px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+        .k-hint { display: inline-flex; align-items: center; gap: 4px; float: right; font-size: 11.5px; font-weight: 600; color: #CDBFFF; margin-top: 2px; }
+        .row2 { gap: 10px; margin-top: 18px; }
+        .chip { background: rgba(255,255,255,.06); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; }
+        .chip .lbl { font-size: 11.5px; } .chip b { font-size: 18px; margin-top: 4px; }
+        .desglose { background: rgba(0,0,0,.3); border: 1px solid var(--line); border-radius: 16px; }
+        h2 { font-size: 17px; font-weight: 700; margin: 24px 2px 12px; letter-spacing: -.01em; }
+        .card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+        .item { padding: 13px 14px; } .item .t { font-size: 14.5px; font-weight: 600; } .item .s { font-size: 12px; }
+        .amt { font-weight: 700; } .pos { color: var(--mint); } .neg { color: var(--txt); } .amt.neg[class*="neg"] { color: var(--txt); }
+        .dot { width: 42px; height: 42px; border-radius: 14px; background: rgba(139,92,246,.16); color: #CDBFFF; }
+        .dot.out { background: rgba(253,164,192,.13); color: var(--rose); } .dot.inn { background: rgba(110,231,183,.13); color: var(--mint); }
+        .bar { height: 8px; background: rgba(255,255,255,.07); } .bar > div { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
+        .bc { background: var(--card); border-radius: 22px; padding: 15px 16px; }
+        .bc .top { gap: 12px; justify-content: flex-start; } .bc .nm { flex: 1; } .bc .vl { font-size: 17px; font-weight: 700; margin-left: auto; }
+        .bc .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: rgba(139,92,246,.16); color: #CDBFFF; flex: none; }
+        .bc .bar { margin-top: 12px; } .bc .sb { margin-top: 8px; }
+        .bc.over { border-color: rgba(253,164,192,.4); } .bc.over .ic { background: rgba(253,164,192,.14); color: var(--rose); }
+        .bc.over .vl { color: var(--rose); } .bc.over .bar > div { width: 100% !important; background: var(--rose); } .bc.over .sb span:last-child { color: var(--rose); font-weight: 600; }
+        .bc.full { border-color: rgba(110,231,183,.3); } .bc.full .ic { background: rgba(110,231,183,.13); color: var(--mint); } .bc.full .bar > div { background: var(--mint); }
+        .more { background: rgba(255,255,255,.04); border-radius: 16px; color: #CDBFFF; }
+        .queue { background: rgba(252,211,77,.09); border: 1px solid rgba(252,211,77,.25); border-radius: 16px; } .queue button { color: var(--gold); }
+        .tabs { background: rgba(14,9,22,.94); border-top: 1px solid var(--line); }
+        .tab { font-size: 10.5px; gap: 4px; padding: 4px 0; } .tab .ms { width: 46px; height: 30px; border-radius: 12px; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; }
+        .tab.on { color: var(--txt); } .tab.on .ms { background: rgba(124,58,237,.28); border-color: rgba(167,139,250,.4); color: #CDBFFF; }
+        .fab { width: 58px; height: 58px; border-radius: 50%; background: var(--cta); color: #fff; margin: -24px auto 0; border: 4px solid var(--bg); box-shadow: 0 14px 30px -8px rgba(192,38,211,.7); }
+        .sheet-bg { background: rgba(8,4,16,.62); }
+        .sheet { background: #181126; border: 1px solid rgba(167,139,250,.3); border-bottom: 0; border-radius: 30px 30px 0 0; box-shadow: 0 -30px 60px rgba(0,0,0,.6); }
+        .inp { background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 14px; } .inp:focus { border-color: var(--cy); }
+        .seg { background: rgba(255,255,255,.05); border-radius: 15px; } .seg button.on { background: linear-gradient(135deg,#6D28D9,#7C3AED); color: #fff; }
+        .btn, .send { background: var(--cta); color: #fff; } .btn { border-radius: 16px; box-shadow: 0 12px 26px -10px rgba(192,38,211,.6); } .send { border-radius: 50%; }
+        .btn:disabled { opacity: .55; box-shadow: none; }
+        .b.u { background: linear-gradient(135deg,#6D28D9,#7C3AED); color: #fff; } .b.m { background: var(--card); } .b.e { color: var(--gold); }
+        .sug { background: rgba(255,255,255,.04); border: 1px solid rgba(167,139,250,.28); border-radius: 99px; padding: 13px 16px; color: #E9E1FF; }
+        .chatbar { background: rgba(14,9,22,.95); } .chatbar textarea { border-radius: 22px; }
+        #toast { background: #21183A; border: 1px solid rgba(167,139,250,.3); }
+        .icon-btn.on { color: #CDBFFF; background: rgba(124,58,237,.25); border-color: rgba(167,139,250,.4); }
+        .icon-btn.dot2::after { background: var(--gold); }
+        .tag { color: var(--gold); }
+        html.light, html:not(.dark) {}
     </style>
 </head>
 <body>
@@ -144,7 +202,7 @@
         <section class="view on" id="v-home">
             <div class="hero">
                 <div onclick="document.getElementById('h-desglose').classList.toggle('on')" style="cursor:pointer">
-                    <div class="lbl">Available balance</div>
+                    <div class="lbl">Available balance<span class="k-hint">See breakdown <span class="ms">expand_more</span></span></div>
                     <div class="big" id="h-total">$0</div>
                 </div>
                 <div class="lbl" id="h-detalle" style="margin-top:6px;font-size:12px"></div>
@@ -412,11 +470,12 @@ function pintar() {
     };
     lista('l-sobres', 'm-sobres', so.map(s => Object.assign({}, s, { _p: (Number(s.monto) || 0) < 0 ? -1 : pct(Number(s.monto) || 0, Number(s.meta) || 0) })), s => {
         const m = Number(s.monto) || 0, g = Number(s.meta) || 0, p = pct(m, g);
-        return `<div class="bc" onclick="abrirDet('sobre','${esc(s.id)}')"><div class="top"><div class="nm">${esc(s.nombre)}</div><div class="vl">${money(m)}</div></div>${g ? `<div class="bar"><div style="width:${p}%"></div></div><div class="sb"><span>${Math.round(p)}% of ${money(g)}</span><span>${m >= g ? 'Full' : money(g - m) + ' to go'}</span></div>` : ''}</div>`;
+        const estado = m < 0 ? ' over' : (g > 0 && m >= g ? ' full' : '');
+        return `<div class="bc${estado}" onclick="abrirDet('sobre','${esc(s.id)}')"><div class="top"><div class="ic">${iconoSobre(s.nombre)}</div><div class="nm">${esc(s.nombre)}</div><div class="vl">${money(m)}</div></div>${g ? `<div class="bar"><div style="width:${p}%"></div></div><div class="sb"><span>${Math.round(p)}% of ${money(g)}</span><span>${m < 0 ? 'Over by ' + money(Math.abs(m)) : (m >= g ? 'Full' : money(g - m) + ' to go')}</span></div>` : ''}</div>`;
     }, 'sobres', 'No envelopes yet.', 'envelopes');
     lista('l-metas', 'm-metas', me.map(m => Object.assign({}, m, { _p: pct(Number(m.montoActual) || 0, Number(m.metaTotal) || 0) })), m => {
         const a = Number(m.montoActual) || 0, t = Number(m.metaTotal) || 0, p = pct(a, t);
-        return `<div class="bc" onclick="abrirDet('meta','${esc(m.id)}')"><div class="top"><div class="nm">${esc(m.nombre)}</div><div class="vl">${money(a)}</div></div><div class="bar"><div style="width:${p}%"></div></div><div class="sb"><span>${Math.round(p)}% of ${money(t)}</span><span>${a >= t ? 'Done' : money(t - a) + ' to go'}</span></div></div>`;
+        return `<div class="bc${a >= t && t > 0 ? ' full' : ''}" onclick="abrirDet('meta','${esc(m.id)}')"><div class="top"><div class="ic">${kodaIcon('target', { size: 18, stroke: 1.9 })}</div><div class="nm">${esc(m.nombre)}</div><div class="vl">${money(a)}</div></div><div class="bar"><div style="width:${p}%"></div></div><div class="sb"><span>${Math.round(p)}% of ${money(t)}</span><span>${a >= t ? 'Done' : money(t - a) + ' to go'}</span></div></div>`;
     }, 'metas', 'No goals yet.', 'goals');
 
     // Filtro de la actividad
@@ -434,7 +493,7 @@ function pintar() {
         const f = fe ? new Date(fe).toLocaleDateString('es-DO', { month: 'short', day: 'numeric' }) : '';
         const marca = m.pendiente ? (m.fallo ? ` · <span class="tag">Not sent: ${esc(m.fallo)}</span>` : ' · <span class="tag">Pending</span>') : '';
         const clic = m.pendiente ? (m.fallo ? ` onclick="descartar('${esc(m.cid)}')"` : ` onclick="toast('Waiting to be sent')"`) : (m.tipo === 'Préstamo' ? '' : ` onclick="abrirEd('${esc(m.id)}')"`);
-        return `<div class="item tap"${clic}><div class="dot"><span class="ms">${m.pendiente ? 'schedule' : ing ? 'south_west' : m.tipo === 'Transferencia' ? 'swap_horiz' : 'north_east'}</span></div><div class="main"><div class="t">${esc(m.desc || tipoEn(m.tipo))}</div><div class="s">${esc(f)} · ${esc(m.cuentaOrigen || '')}${m.categoria ? ' · ' + esc(m.categoria) : ''}${marca}</div></div><div class="amt ${ing ? 'pos' : ''}">${ing ? '+' : ''}${money(m.monto)}</div></div>`;
+        return `<div class="item tap"${clic}><div class="dot ${m.pendiente ? '' : ing ? 'inn' : (m.tipo === 'Transferencia' ? '' : 'out')}"><span class="ms">${m.pendiente ? 'schedule' : ing ? 'south_west' : m.tipo === 'Transferencia' ? 'swap_horiz' : 'north_east'}</span></div><div class="main"><div class="t">${esc(m.desc || tipoEn(m.tipo))}</div><div class="s">${esc(f)} · ${esc(m.cuentaOrigen || '')}${m.categoria ? ' · ' + esc(m.categoria) : ''}${marca}</div></div><div class="amt ${ing ? 'pos' : ''}">${ing ? '+' : ''}${money(m.monto)}</div></div>`;
     }).join('') : `<div class="empty">${hayFiltro ? 'Nothing matches.' : 'No activity yet.'}</div>`;
 
     $('l-comp').innerHTML = co.length ? co.map(c => {
@@ -444,10 +503,32 @@ function pintar() {
 
     $('l-check').innerHTML = ck.length ? ck.map(c => {
         const ok = c.pagado === true || c.pagado === 'TRUE' || c.pagado === 'true';
-        return `<div class="item ck" onclick="marcarCk('${esc(c.id)}')"><div class="dot" style="${ok ? 'color:var(--cy)' : ''}"><span class="ms">${ok ? 'check_circle' : 'radio_button_unchecked'}</span></div><div class="main"><div class="t" style="${ok ? 'opacity:.55;text-decoration:line-through' : ''}">${esc(c.nombre)}</div></div><div class="amt">${money(c.monto)}</div></div>`;
+        return `<div class="item ck" onclick="marcarCk('${esc(c.id)}')"><div class="dot ${ok ? 'inn' : ''}" style="${ok ? '' : 'color:var(--gold);background:rgba(252,211,77,.12)'}"><span class="ms">${ok ? 'check_circle' : 'radio_button_unchecked'}</span></div><div class="main"><div class="t" style="${ok ? 'opacity:.55;text-decoration:line-through' : ''}">${esc(c.nombre)}</div></div><div class="amt">${money(c.monto)}</div></div>`;
     }).join('') : '<div class="empty">Nothing to pay right now.</div>';
     pintarNotifs();
 }
+
+
+/* ---- Presentación (Purple Premium): iconos Lucide; no toca datos ni lógica ---- */
+function iconoSobre(nombre) {
+    const n = String(nombre || '').toLowerCase();
+    const mapa = [[/super|mercado|despensa|market|grocer/, 'shopping-cart'], [/transp|bus|metro|taxi|uber/, 'bus'], [/gasolin|auto|carro|coche/, 'car'], [/ropa|vestid|cloth/, 'shirt'], [/salida|fiesta|party/, 'party-popper'], [/comida|restaur|aliment|food|caf/, 'utensils'], [/salud|medic|doctor|health/, 'heart-pulse'], [/educ|escuel|curso|school|estudi/, 'graduation-cap'], [/casa|hogar|renta|alquiler|home|rent/, 'house'], [/viaje|vacac|travel|trip/, 'plane'], [/ocio|juego|entreten|game|stream/, 'gamepad-2']];
+    let ic = 'wallet-cards';
+    for (const [re, i] of mapa) { if (re.test(n)) { ic = i; break; } }
+    try { return kodaIcon(ic, { size: 18, stroke: 1.9 }); } catch (e) { return ''; }
+}
+function lucidificar() {
+    if (!window.kodaIconDe) return;
+    document.querySelectorAll('.ms').forEach(el => {
+        if (el.querySelector('svg')) return;
+        const t = (el.textContent || '').trim(); if (!t) return;
+        const sz = parseInt(el.style.fontSize) || (el.closest('.fab') ? 26 : el.closest('.tab') ? 19 : el.closest('.dot') ? 19 : 20);
+        const svg = kodaIconDe(t, { size: sz, stroke: el.closest('.fab') ? 2.4 : 1.9 });
+        if (svg) { el.innerHTML = svg; el.classList.add('k-svg'); }
+    });
+}
+try { new MutationObserver(() => lucidificar()).observe(document.body, { childList: true, subtree: true, characterData: true }); } catch (e) {}
+document.addEventListener('DOMContentLoaded', lucidificar); lucidificar();
 
 /* ---- Registrar ---- */
 
